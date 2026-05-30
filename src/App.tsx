@@ -9,30 +9,33 @@ import { AuscultationSection } from './components/AuscultationSection';
 import { StatisticsSection } from './components/StatisticsSection';
 import { AdminPanel } from './components/AdminPanel';
 import { TestPracticePage } from './components/TestPracticePage';
+import { ResidencyTestPage } from './components/ResidencyTestPage';
 import { playClickSound } from './utils/sounds';
 
 // Icons
-import { 
-  BookOpen, 
-  Upload, 
-  FolderLock, 
-  Users, 
-  Activity, 
-  BarChart, 
-  ShieldAlert, 
-  Sun, 
-  Moon, 
-  LogOut, 
-  GraduationCap 
+import {
+  BookOpen,
+  Upload,
+  FolderLock,
+  Users,
+  Activity,
+  BarChart,
+  ShieldAlert,
+  Sun,
+  Moon,
+  LogOut,
+  GraduationCap,
+  Stethoscope
 } from 'lucide-react';
 
-type SectionType = 'library' | 'upload' | 'my-uploads' | 'groups' | 'auscultations' | 'stats' | 'admin';
+type SectionType = 'library' | 'upload' | 'my-uploads' | 'groups' | 'auscultations' | 'stats' | 'admin' | 'residency';
 
 const AppContent: React.FC = () => {
   const { user, signInWithGoogle, signOutUser, isAdmin, loginAnonymously } = useFirebase();
   const [activeSection, setActiveSection] = useState<SectionType>('library');
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
   const [activePracticeTestId, setActivePracticeTestId] = useState<string | null>(null);
+  const [showResidency, setShowResidency] = useState(false);
   
   // Theme state: default to 'light' (as requested: "მუქი ფონი არ იყოს, მაქსიმალურად ლამაზი და სადა დიზაინი")
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -120,6 +123,17 @@ const AppContent: React.FC = () => {
         {/* Footer */}
         <div className="text-center text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">
           © {new Date().getFullYear()} სამედიცინო & აკადემიური მომზადების ცენტრი • ყველა უფლება დაცულია
+        </div>
+      </div>
+    );
+  }
+
+  // Residency tests full-page view
+  if (showResidency) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-white p-4 md:p-6 transition-colors duration-200">
+        <div className="max-w-5xl mx-auto">
+          <ResidencyTestPage onGoBack={() => setShowResidency(false)} />
         </div>
       </div>
     );
@@ -231,6 +245,14 @@ const AppContent: React.FC = () => {
               📊 სტატისტიკა
             </button>
 
+            <button
+              onClick={() => { playClickSound(); setShowResidency(true); }}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer text-zinc-700 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-950 font-semibold"
+            >
+              <Stethoscope className="w-4 h-4 text-teal-500" />
+              🩺 რეზიდენტურის ტესტები
+            </button>
+
             {/* Admin panel — only visible to admin users */}
             {isAdmin && (
               <button
@@ -315,6 +337,7 @@ const AppContent: React.FC = () => {
               {activeSection === 'auscultations' && <AuscultationSection />}
               {activeSection === 'stats' && <StatisticsSection />}
               {activeSection === 'admin' && <AdminPanel />}
+              {activeSection === 'residency' && <ResidencyTestPage onGoBack={() => setActiveSection('library')} />}
             </>
           )}
         </main>
@@ -352,6 +375,14 @@ const AppContent: React.FC = () => {
         >
           <Users className="w-4 h-4" />
           <span className="text-[10px]">ჯგუფები</span>
+        </button>
+
+        <button
+          onClick={() => { playClickSound(); setShowResidency(true); }}
+          className="flex flex-col items-center gap-0.5 text-xs font-sans text-teal-500 dark:text-teal-400"
+        >
+          <Stethoscope className="w-4 h-4" />
+          <span className="text-[10px]">რეზიდ.</span>
         </button>
 
         <button
