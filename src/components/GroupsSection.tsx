@@ -11,7 +11,7 @@ interface GroupsSectionProps {
 }
 
 export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) => {
-  const { user } = useFirebase();
+  const { user, isLocalUser } = useFirebase();
   const [groups, setGroups] = useState<Group[]>([]);
   const [joinedGroupIds, setJoinedGroupIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
@@ -26,10 +26,8 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
   const [joinCode, setJoinCode] = useState('');
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || isLocalUser) { setLoading(false); return; }
 
-    // We can fetch all groups, and see which ones the user is registered in by listening to members,
-    // or fetch the group catalog and filter. Let's do a reliable snapshot listener on all groups.
     const unsubGroups = onSnapshot(collection(db, 'groups'), async (snapshot) => {
       const list: Group[] = [];
       const userJoined: string[] = [];

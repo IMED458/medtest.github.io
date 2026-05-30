@@ -34,6 +34,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Deploy Firestore rules
+        if: ${{ secrets.FIREBASE_TOKEN != '' }}
+        run: npx firebase-tools deploy --only firestore:rules --token "${{ secrets.FIREBASE_TOKEN }}" --non-interactive
+        continue-on-error: true
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3

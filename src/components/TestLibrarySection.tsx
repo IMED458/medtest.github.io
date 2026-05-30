@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { collection, onSnapshot, query, where, doc, setDoc } from 'firebase/firestore';
 import { useFirebase } from './FirebaseProvider';
+import { localGetTests, localGetProgress, localSaveTest, localSaveQuestions } from '../utils/localStore';
 import { TestMetadata, UserProgress, Question } from '../types';
 import { Search, Play, RefreshCw, ClipboardList, BookOpen, Calendar, User, Sparkles, Loader2 } from 'lucide-react';
 import { playClickSound, playCorrectSound, playIncorrectSound } from '../utils/sounds';
@@ -11,7 +12,7 @@ interface TestLibrarySectionProps {
 }
 
 export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartTest }) => {
-  const { user } = useFirebase();
+  const { user, isLocalUser } = useFirebase();
   const [tests, setTests] = useState<TestMetadata[]>([]);
   const [progresses, setProgresses] = useState<Record<string, UserProgress>>({});
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,7 +41,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
         }
       };
 
-      await setDoc(doc(db, 'tests', demoTestId), testMeta);
+      if (!isLocalUser) await setDoc(doc(db, 'tests', demoTestId), testMeta);
 
       const demoQuestions: Omit<Question, 'id'>[] = [
         {
@@ -105,12 +106,15 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
         }
       ];
 
-      for (let i = 0; i < demoQuestions.length; i++) {
-        const qId = `q_${i + 1}`;
-        await setDoc(doc(db, 'tests', demoTestId, 'questions', qId), {
-          ...demoQuestions[i],
-          id: qId
-        });
+      const builtQuestions: Question[] = demoQuestions.map((q, i) => ({ ...q, id: `q_${i + 1}` }));
+      if (isLocalUser) {
+        localSaveTest(testMeta);
+        localSaveQuestions(demoTestId, builtQuestions);
+        setTests(prev => [testMeta, ...prev]);
+      } else {
+        for (let i = 0; i < builtQuestions.length; i++) {
+          await setDoc(doc(db, 'tests', demoTestId, 'questions', builtQuestions[i].id), builtQuestions[i]);
+        }
       }
       playCorrectSound();
       alert('სადემონსტრაციო კარდიოლოგიური ტესტი წარმატებით ჩაიტვირთა ბაზაში!');
@@ -124,17 +128,30 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
   };
 
   useEffect(() => {
-    // Read all tests shared on the platform
+    if (isLocalUser) {
+      // Local guest: show only their own tests from localStorage
+      if (user) {
+        setTests(localGetTests(user.uid).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+        const progressMap: Record<string, UserProgress> = {};
+        localGetProgress(user.uid).forEach(p => { progressMap[p.testId] = p; });
+        setProgresses(progressMap);
+      }
+      setLoading(false);
+      return;
+    }
+
+    // Google-auth user: read all public tests from Firestore
     const unsubTests = onSnapshot(collection(db, 'tests'), (snapshot) => {
       const list: TestMetadata[] = [];
       snapshot.forEach((doc) => {
         list.push(doc.data() as TestMetadata);
       });
-      list.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       setTests(list);
       setLoading(false);
     }, (err) => {
-      handleFirestoreError(err, OperationType.LIST, 'tests');
+      console.error('Firestore tests:', err);
+      setLoading(false);
     });
 
     if (user) {
@@ -147,16 +164,11 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
         });
         setProgresses(progressMap);
       });
-      return () => {
-        unsubTests();
-        unsubProgress();
-      };
+      return () => { unsubTests(); unsubProgress(); };
     }
 
-    return () => {
-      unsubTests();
-    };
-  }, [user]);
+    return () => unsubTests();
+  }, [user, isLocalUser]);
 
   const filteredTests = tests.filter(t => 
     t.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
