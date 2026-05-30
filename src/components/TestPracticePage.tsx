@@ -262,7 +262,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
     };
 
     fetchTestData();
-  }, [testId, user]);
+  }, [testId, user, isLocalUser]);
 
   // Handle Resume Progress actions
   const handleResumeDecision = (resume: boolean) => {

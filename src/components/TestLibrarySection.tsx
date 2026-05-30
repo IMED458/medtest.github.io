@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
-import { collection, onSnapshot, query, where, doc, setDoc } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useFirebase } from './FirebaseProvider';
-import { localGetTests, localGetProgress, localSaveTest, localSaveQuestions } from '../utils/localStore';
-import { TestMetadata, UserProgress, Question } from '../types';
-import { Search, Play, RefreshCw, ClipboardList, BookOpen, Calendar, User, Sparkles, Loader2 } from 'lucide-react';
+import { localGetTests, localGetProgress } from '../utils/localStore';
+import { TestMetadata, UserProgress } from '../types';
+import { Search, Play, RefreshCw, ClipboardList, BookOpen, Calendar, User } from 'lucide-react';
 import { playClickSound, playCorrectSound, playIncorrectSound } from '../utils/sounds';
 
 interface TestLibrarySectionProps {
@@ -17,115 +17,6 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
   const [progresses, setProgresses] = useState<Record<string, UserProgress>>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
-  const [seeding, setSeeding] = useState(false);
-
-  const handleSeedDemoTest = async () => {
-    setSeeding(true);
-    playClickSound();
-    try {
-      const demoTestId = 'test_demo_cardiology_' + Math.random().toString(36).substring(2, 7);
-      const testMeta: TestMetadata = {
-        id: demoTestId,
-        title: 'კარდიოლოგია და შინაგანი სნეულებები (საცდელი ტესტი)',
-        createdBy: user?.uid || 'guest_local_system',
-        creatorName: user?.displayName || 'სისტემური დემო',
-        createdAt: new Date().toISOString(),
-        questionCount: 5,
-        errorCount: 0,
-        originalFileName: 'cardiology_demo.txt',
-        validationReport: {
-          totalQuestions: 5,
-          correctQuestions: 5,
-          problematicQuestions: 0,
-          issues: []
-        }
-      };
-
-      if (!isLocalUser) await setDoc(doc(db, 'tests', demoTestId), testMeta);
-
-      const demoQuestions: Omit<Question, 'id'>[] = [
-        {
-          testId: demoTestId,
-          questionText: 'რა არის მიოკარდიუმის ინფარქტის (STEMI) დროს პირველი რიგის კორონარული რევასკულარიზაციის სასურველი მეთოდი სიმპტომების დაწყებიდან პირველ 12 საათში?',
-          options: [
-            'თრომბოლიზური თერაპია ალტეპლაზით',
-            'პირველადი კანქვეშა კორონარული ინტერვენცია (PCI / სტენტირება)',
-            'კორონარული არტერიების შუნტირება (CABG)',
-            'კონსერვატიული მკურნალობა დაბალმოლეკულური ჰეპარინით'
-          ],
-          correctOptionIndex: 1,
-          originalIndex: 1
-        },
-        {
-          testId: demoTestId,
-          questionText: 'აუსკულტაციით გულის მწვერვალზე მოსმენილი დაბალსიხშირიანი, უხეში დიასტოლური შუილი, რომელიც ძლიერდება მარცხენა გვერდზე წოლისას (Opening snap-ით), ყველაზე მეტად მიუთითებს:',
-          options: [
-            'აორტის სარქვლის სტენოზზე',
-            'მიტრალური სარქვლის უკმარისობაზე',
-            'მიტრალური სარქვლის სტენოზზე',
-            'ფიზიოლოგიურ III ტონზე'
-          ],
-          correctOptionIndex: 2,
-          originalIndex: 2
-        },
-        {
-          testId: demoTestId,
-          questionText: 'რა წარმოადგენს მწვავე ანაფილაქსიური რეაქციის / შოკის მართვის პირველადი გადაუდებელი დახმარების სასიცოცხლო პრეპარატს და მისი შეყვანის ოპტიმალურ გზას?',
-          options: [
-            'ადრენალინი (ეპინეფრინი) ინტრავენურად სწრაფი ნაკადით',
-            'ადრენალინი (ეპინეფრინი) კუნთში (ბარძაყის ლატერალურ ფართო კუნთში)',
-            'დექსამეტაზონი ან ჰიდროკორტიზონი ინტრავენურად',
-            'ფიზიოლოგიური ხსნარის სწრაფი გადასხმა'
-          ],
-          correctOptionIndex: 1,
-          originalIndex: 3
-        },
-        {
-          testId: demoTestId,
-          questionText: 'არტერიული ჰიპერტენზიის მქონე პაციენტში, რომელსაც ანამნეზში აქვს შაქრიანი დიაბეტი და გამოხატული ალბუმინურია, რომელი ანტიჰიპერტენზიული ჯგუფია პირველი რიგის არჩევანი ორგანოთა პროტექციის მიზნით?',
-          options: [
-            'ბეტა-ბლოკერები (მაგ. ბისოპროლოლი)',
-            'მარყუჟოვანი დიურეტიკები (მაგ. ტორასემიდი)',
-            'აგფ ინჰიბიტორები (ACEi / მაგ. რამიპრილი) ან ARB (მაგ. ვალსარტანი)',
-            'დიჰიდროპირიდინული კალციუმის ანტაგონისტები (მაგ. ამლოდიპინი)'
-          ],
-          correctOptionIndex: 2,
-          originalIndex: 4
-        },
-        {
-          testId: demoTestId,
-          questionText: 'ეკგ-ზე ფართო QRS კომპლექსების მქონე მონომორფული პარკუჭოვანი ტაქიკარდიის დროს, თუ პაციენტი არის ჰემოდინამიკურად არასტაბილური (ჰიპოტენზია, ცნობიერების დაქვეითება, გულმკერდში ტკივილი), რა არის დაუყოვნებელი მოქმედება?',
-          options: [
-            'ამიოდარონის 150 მგ ინტრავენური ინფუზია 10 წუთში',
-            'სინქრონიზებული პირდაპირი დენის კარდიოვერსია',
-            'მაგნიუმის სულფატის ინტრავენური გადასხმა',
-            'კაროტიდული სინუსის მასაჟი'
-          ],
-          correctOptionIndex: 1,
-          originalIndex: 5
-        }
-      ];
-
-      const builtQuestions: Question[] = demoQuestions.map((q, i) => ({ ...q, id: `q_${i + 1}` }));
-      if (isLocalUser) {
-        localSaveTest(testMeta);
-        localSaveQuestions(demoTestId, builtQuestions);
-        setTests(prev => [testMeta, ...prev]);
-      } else {
-        for (let i = 0; i < builtQuestions.length; i++) {
-          await setDoc(doc(db, 'tests', demoTestId, 'questions', builtQuestions[i].id), builtQuestions[i]);
-        }
-      }
-      playCorrectSound();
-      alert('სადემონსტრაციო კარდიოლოგიური ტესტი წარმატებით ჩაიტვირთა ბაზაში!');
-    } catch (err: any) {
-      console.error(err);
-      playIncorrectSound();
-      alert('ტესტის ჩატვირთვა ვერ მოხერხდა: ' + (err.message || err));
-    } finally {
-      setSeeding(false);
-    }
-  };
 
   useEffect(() => {
     if (isLocalUser) {
@@ -195,19 +86,6 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
         </div>
         
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-          <button
-            onClick={handleSeedDemoTest}
-            disabled={seeding}
-            className="flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-750 disabled:bg-indigo-400 text-white transition shadow-sm cursor-pointer"
-          >
-            {seeding ? (
-              <Loader2 className="w-3.5 h-3.5 animate-spin" />
-            ) : (
-              <Sparkles className="w-3.5 h-3.5" />
-            )}
-            საცდელი ტესტის ჩატვირთვა
-          </button>
-
           <div className="relative w-full md:w-60">
             <input
               type="text"
@@ -225,26 +103,9 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
           <BookOpen className="w-12 h-12 text-zinc-350 dark:text-zinc-700 mb-4" />
           <h3 className="font-semibold text-zinc-750 dark:text-zinc-200 font-sans mb-1">ტესტები ვერ მოიძებნა</h3>
-          <p className="text-zinc-500 text-xs font-sans max-w-sm mb-6 leading-relaxed">
-            მოცემული საძიებო პარამეტრით შესაბამისი გამოცდები ბაზაში არ ფიქსირდება. გსურთ ჩატვირთოთ მაღალი ხარისხის საცდელი კლინიკური ტესტი პასუხებით?
+          <p className="text-zinc-500 text-xs font-sans max-w-sm leading-relaxed">
+            {searchTerm ? 'მოცემული საძიებო პარამეტრით ტესტი ვერ მოიძებნა.' : 'ბიბლიოთეკა ცარიელია. ატვირთეთ პირველი ტესტი "ატვირთვა" განყოფილებიდან.'}
           </p>
-          <button
-            onClick={handleSeedDemoTest}
-            disabled={seeding}
-            className="flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold rounded-xl bg-indigo-605 hover:bg-indigo-700 disabled:bg-indigo-400 text-white transition shadow-md cursor-pointer"
-          >
-            {seeding ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                მიმდინარეობს ჩატვირთვა...
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4" />
-                სადემონსტრაციო ტესტის ჩატვირთვა
-              </>
-            )}
-          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

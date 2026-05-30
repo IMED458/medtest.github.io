@@ -2,10 +2,9 @@ import { Question, ValidationIssue, ValidationReport } from '../types';
 import * as pdfjsLib from 'pdfjs-dist';
 
 // Set up source for PDFJS global worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+// @ts-ignore
+import pdfjsWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorkerUrl;
 
 /**
  * Normalizes Georgian and Latin characters to facilitate searching/comparison

@@ -61,18 +61,28 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
             handleFirestoreError(err, OperationType.GET, `users/${fbUser.uid}`);
           }
 
+          const ADMIN_EMAILS = ['imedashviligio27@gmail.com'];
+          const isAdminEmail = ADMIN_EMAILS.includes(fbUser.email || '');
+
           if (userDocSnap && userDocSnap.exists()) {
             const data = userDocSnap.data() as UserProfile;
-            setUser(data);
+            // Upgrade to admin if email matches, even if stored role is 'user'
+            if (isAdminEmail && data.role !== 'admin') {
+              const updated = { ...data, role: 'admin' as const };
+              try { await setDoc(userDocRef, updated); } catch {}
+              setUser(updated);
+            } else {
+              setUser(data);
+            }
           } else {
-            // Document doesn't exist yet, bootstrap user
+            // Bootstrap new user
             const profile: UserProfile = {
               uid: fbUser.uid,
               email: fbUser.email || 'guest@portal.ge',
               displayName: fbUser.displayName || (fbUser.isAnonymous ? 'სტუმარი' : fbUser.email?.split('@')[0] || 'სტუდენტი'),
               photoURL: fbUser.photoURL || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + fbUser.uid,
               createdAt: new Date().toISOString(),
-              role: 'user'
+              role: isAdminEmail ? 'admin' : 'user'
             };
             try {
               await setDoc(userDocRef, profile);

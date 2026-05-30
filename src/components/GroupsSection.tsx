@@ -155,6 +155,16 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
     );
   }
 
+  if (isLocalUser) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center px-4">
+        <Users className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
+        <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-2">ჯგუფები მხოლოდ Google-ით შესვლისთვის</h3>
+        <p className="text-zinc-500 text-xs font-sans max-w-sm">სასწავლო ჯგუფების შესაქმნელად და ტესტების გასაზიარებლად გთხოვთ გაიაროთ ავტორიზაცია Google-ის ანგარიშით.</p>
+      </div>
+    );
+  }
+
   return (
     <div id="groups-section" className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
