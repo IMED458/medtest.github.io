@@ -70,7 +70,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-550 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს ტესტების ბიბლიოთეკის ჩატვირთვა...</p>
+        <p className="text-zinc-500 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს ტესტების ბიბლიოთეკის ჩატვირთვა...</p>
       </div>
     );
   }
@@ -102,7 +102,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
       {filteredTests.length === 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
           <BookOpen className="w-12 h-12 text-zinc-350 dark:text-zinc-700 mb-4" />
-          <h3 className="font-semibold text-zinc-750 dark:text-zinc-200 font-sans mb-1">ტესტები ვერ მოიძებნა</h3>
+          <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">ტესტები ვერ მოიძებნა</h3>
           <p className="text-zinc-500 text-xs font-sans max-w-sm leading-relaxed">
             {searchTerm ? 'მოცემული საძიებო პარამეტრით ტესტი ვერ მოიძებნა.' : 'ბიბლიოთეკა ცარიელია. ატვირთეთ პირველი ტესტი "ატვირთვა" განყოფილებიდან.'}
           </p>
@@ -117,10 +117,10 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
             return (
               <div 
                 key={test.id} 
-                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-750 rounded-2xl p-5 shadow-xs transition flex flex-col justify-between"
+                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 rounded-2xl p-5 shadow-xs transition flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-semibold text-zinc-850 dark:text-zinc-150 font-sans leading-tight line-clamp-2 mb-2 min-h-10">
+                  <h3 className="font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-tight line-clamp-2 mb-2 min-h-10">
                     {test.title}
                   </h3>
 
@@ -157,10 +157,10 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-805">
+                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800">
                   <button
                     onClick={() => { playClickSound(); onStartTest(test.id, hasStarted); }}
-                    className="w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-zinc-950 dark:hover:bg-zinc-850 text-indigo-600 dark:text-indigo-400 font-semibold text-xs rounded-xl transition"
+                    className="w-full flex items-center justify-center gap-1.5 px-3 py-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-indigo-600 dark:text-indigo-400 font-semibold text-xs rounded-xl transition"
                   >
                     <Play className="w-3.5 h-3.5 fill-current" />
                     {hasStarted ? 'გაგრძელება' : 'ტესტის გავლა'}

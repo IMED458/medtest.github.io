@@ -150,7 +150,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <Users className="w-8 h-8 text-indigo-500 animate-pulse mb-4" />
-        <p className="text-zinc-550 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს თქვენი ჯგუფების ჩატვირთვა...</p>
+        <p className="text-zinc-500 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს თქვენი ჯგუფების ჩატვირთვა...</p>
       </div>
     );
   }
@@ -178,14 +178,14 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
         <div className="flex gap-2 shrink-0">
           <button
             onClick={() => { playClickSound(); setShowJoin(true); setShowCreate(false); }}
-            className="flex items-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-805 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-xs font-semibold rounded-xl text-zinc-750 dark:text-zinc-300 transition"
+            className="flex items-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-xs font-semibold rounded-xl text-zinc-700 dark:text-zinc-300 transition"
           >
             <Key className="w-4 h-4 text-indigo-500" />
             კოდით შესვლა
           </button>
           <button
             onClick={() => { playClickSound(); setShowCreate(true); setShowJoin(false); }}
-            className="flex items-center gap-1.5 px-3 py-2 bg-indigo-650 hover:bg-indigo-700 text-xs font-semibold rounded-xl text-white transition"
+            className="flex items-center gap-1.5 px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold rounded-xl text-white transition"
           >
             <Plus className="w-4 h-4" />
             ჯგუფის შექმნა
@@ -199,7 +199,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
           <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 font-sans">ახალი ჯგუფის შექმნა</h3>
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="block text-xs text-zinc-455 dark:text-zinc-400 font-sans mb-1">ჯგუფის სახელი *</label>
+              <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">ჯგუფის სახელი *</label>
               <input
                 type="text"
                 required
@@ -210,7 +210,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
               />
             </div>
             <div>
-              <label className="block text-xs text-zinc-455 dark:text-zinc-400 font-sans mb-1">აღწერა</label>
+              <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">აღწერა</label>
               <textarea
                 value={grpDesc}
                 onChange={(e) => setGrpDesc(e.target.value)}
@@ -224,13 +224,13 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
             <button
               type="button"
               onClick={() => { playClickSound(); setShowCreate(false); }}
-              className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-650 dark:text-zinc-350 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
+              className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
             >
               გაუქმება
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-indigo-650 hover:bg-indigo-700 text-white rounded-xl transition"
+              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition"
             >
               შექმნა
             </button>
@@ -243,7 +243,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
         <form onSubmit={handleJoinByCode} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-4 shadow-xs animate-in slide-in-from-top-4 duration-300">
           <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 font-sans">ჯგუფში გაწევრიანება კოდით</h3>
           <div>
-            <label className="block text-xs text-zinc-455 dark:text-zinc-400 font-sans mb-1">ჯგუფის მოწვევის კოდი *</label>
+            <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">ჯგუფის მოწვევის კოდი *</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -252,11 +252,11 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
                 value={joinCode}
                 onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
                 placeholder="მაგ: AB12YZ"
-                className="flex-1 px-3 py-2 text-xs font-mono rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-850 dark:text-zinc-100 focus:ring-1 focus:ring-indigo-500 outline-hidden tracking-widest text-center"
+                className="flex-1 px-3 py-2 text-xs font-mono rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 focus:ring-1 focus:ring-indigo-500 outline-hidden tracking-widest text-center"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-indigo-650 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center"
+                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center"
               >
                 შესვლა <ArrowRight className="w-4 h-4 ml-1" />
               </button>
@@ -271,7 +271,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
       {groups.length === 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
           <Users className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
-          <h3 className="font-semibold text-zinc-750 dark:text-zinc-200 font-sans mb-1">უჯგუფო გარემო</h3>
+          <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">უჯგუფო გარემო</h3>
           <p className="text-zinc-500 text-xs font-sans max-w-sm">
             ჯერ არ ხართ გაწევრიანებული არცერთ სასწავლო ჯგუფში. შექმენით ახალი ჯგუფი ან მოითხოვეთ შესვლის კოდი.
           </p>
@@ -289,7 +289,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
               >
                 <div>
                   <div className="flex justify-between items-start gap-2 mb-2">
-                    <h3 className="font-semibold text-zinc-850 dark:text-zinc-150 font-sans leading-tight">
+                    <h3 className="font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-tight">
                       {group.name}
                     </h3>
                     <span className="shrink-0 px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-[10px] text-zinc-500 font-mono rounded-full flex items-center gap-1 font-semibold">
@@ -303,7 +303,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-805 text-xs text-zinc-400 dark:text-zinc-500">
+                <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-400 dark:text-zinc-500">
                   <div className="flex items-center gap-1 font-sans text-[11px]">
                     <Shield className="w-3.5 h-3.5 text-indigo-400" />
                     <span>ავტორი: <strong>{isOwner ? 'თქვენ' : (group.creatorName || 'მოლაპარაკე')}</strong></span>

@@ -153,7 +153,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
           className={`border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition ${
             isDragging 
               ? 'border-indigo-500 bg-indigo-50/50 dark:bg-indigo-950/20' 
-              : 'border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-650 bg-zinc-50 dark:bg-zinc-950/40'
+              : 'border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-600 bg-zinc-50 dark:bg-zinc-950/40'
           }`}
         >
           <input
@@ -204,7 +204,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
               <div className="text-sm text-emerald-600 dark:text-emerald-400 font-sans">სწორი კითხვები</div>
               <div className="text-2xl font-bold font-mono text-emerald-700 dark:text-emerald-300">{report.correctQuestions}</div>
             </div>
-            <div className={report.problematicQuestions > 0 ? "p-4 bg-rose-50/55 dark:bg-rose-950/25 rounded-xl border border-rose-100 dark:border-rose-955 text-center" : "p-4 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-150 dark:border-zinc-800 text-center"}>
+            <div className={report.problematicQuestions > 0 ? "p-4 bg-rose-50/55 dark:bg-rose-950/25 rounded-xl border border-rose-100 dark:border-rose-950 text-center" : "p-4 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-150 dark:border-zinc-800 text-center"}>
               <div className="text-sm text-rose-600 dark:text-rose-400 font-sans">პრობლემური კითხვები</div>
               <div className="text-2xl font-bold font-mono text-rose-700 dark:text-rose-300">{report.problematicQuestions}</div>
             </div>
@@ -253,7 +253,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
           სისტემას გააჩნია ავტომატური დამუშავების ძრავა. ტესტების სწორად აღსაქმელად ფაილში დაიცავით შემდეგი მარტივი სინტაქსი:
         </p>
         <div className="bg-zinc-100 dark:bg-zinc-950 rounded-lg p-4 font-mono text-xs text-zinc-800 dark:text-zinc-300 space-y-1.5">
-          <p className="text-indigo-650 dark:text-indigo-400">//// რომელია საქართველოს დედაქალაქი?</p>
+          <p className="text-indigo-600 dark:text-indigo-400">//// რომელია საქართველოს დედაქალაქი?</p>
           <p className="text-zinc-400">/// ქუთაისი</p>
           <p className="text-emerald-600 dark:text-emerald-400">// თბილისი</p>
           <p className="text-zinc-400">/// ბათუმი</p>

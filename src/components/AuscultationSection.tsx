@@ -9,7 +9,7 @@ export const AuscultationSection: React.FC = () => {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold text-zinc-850 dark:text-zinc-150 font-sans tracking-tight">
+        <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-150 font-sans tracking-tight">
           აუკულტაციის მოდული მზადდება
         </h2>
         <p className="text-zinc-500 text-xs font-sans max-w-md mx-auto leading-relaxed">
@@ -17,40 +17,40 @@ export const AuscultationSection: React.FC = () => {
         </p>
       </div>
 
-      <hr className="border-zinc-100 dark:border-zinc-805" />
+      <hr className="border-zinc-100 dark:border-zinc-800" />
 
       <h3 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest font-sans">მომავალში დაემატება:</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-805 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
+        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
           <Volume2 className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
           <div className="font-sans">
-            <h4 className="font-semibold text-zinc-750 dark:text-zinc-200 text-xs">აუდიო ტესტები</h4>
+            <h4 className="font-semibold text-zinc-700 dark:text-zinc-200 text-xs">აუდიო ტესტები</h4>
             <p className="text-[10px] text-zinc-450 dark:text-zinc-500 mt-0.5">სმენითი აღქმის ტესტები კლინიკური დიაგნოსტიკისთვის.</p>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-805 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
+        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
           <Heart className="w-5 h-5 text-rose-555 shrink-0 mt-0.5" />
           <div className="font-sans">
-            <h4 className="font-semibold text-zinc-750 dark:text-zinc-200 text-xs">გულის ხმები</h4>
-            <p className="text-[10px] text-zinc-455 dark:text-zinc-500 mt-0.5">ტონების, შუილებისა და სხვა არანორმალური კარდიოლოგიური რიტმების ბაზა.</p>
+            <h4 className="font-semibold text-zinc-700 dark:text-zinc-200 text-xs">გულის ხმები</h4>
+            <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-0.5">ტონების, შუილებისა და სხვა არანორმალური კარდიოლოგიური რიტმების ბაზა.</p>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-805 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
+        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
           <Activity className="w-5 h-5 text-emerald-550 shrink-0 mt-0.5" />
           <div className="font-sans">
-            <h4 className="font-semibold text-zinc-750 dark:text-zinc-200 text-xs">ფილტვების ხმები</h4>
+            <h4 className="font-semibold text-zinc-700 dark:text-zinc-200 text-xs">ფილტვების ხმები</h4>
             <p className="text-[10px] text-zinc-450 dark:text-zinc-500 mt-0.5">სუნთქვის ხმების, ხიხინისა და ბრონქული ასპირაციის ნიმუშები.</p>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-805 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
+        <div className="p-4 rounded-xl border border-zinc-150 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 flex items-start gap-3">
           <Cpu className="w-5 h-5 text-purple-550 shrink-0 mt-0.5" />
           <div className="font-sans">
-            <h4 className="font-semibold text-zinc-750 dark:text-zinc-200 text-xs">კლინიკური სიმულაციები</h4>
-            <p className="text-[10px] text-zinc-455 dark:text-zinc-500 mt-0.5">ინტერაქტიული ქეისები ფონოენდოსკოპის ვირტუალური გამოყენებით.</p>
+            <h4 className="font-semibold text-zinc-700 dark:text-zinc-200 text-xs">კლინიკური სიმულაციები</h4>
+            <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-0.5">ინტერაქტიული ქეისები ფონოენდოსკოპის ვირტუალური გამოყენებით.</p>
           </div>
         </div>
       </div>

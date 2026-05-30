@@ -615,8 +615,8 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
   if (loading && !showPrompt) {
     return (
       <div className="flex flex-col items-center justify-center py-24 font-sans">
-        <RefreshCw className="w-10 h-10 text-indigo-505 animate-spin mb-4" />
-        <p className="text-zinc-650 dark:text-zinc-400 font-sans text-xs">მიმდინარეობს ტესტირების გარემოს მომზადება...</p>
+        <RefreshCw className="w-10 h-10 text-indigo-500 animate-spin mb-4" />
+        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-xs">მიმდინარეობს ტესტირების გარემოს მომზადება...</p>
       </div>
     );
   }
@@ -624,7 +624,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
   // Handle zero questions matching filters
   if (activeQuestionsPool.length === 0) {
     return (
-      <div className="fixed inset-0 z-40 bg-zinc-50 dark:bg-zinc-955 p-4 flex items-center justify-center h-[100dvh]">
+      <div className="fixed inset-0 z-40 bg-zinc-50 dark:bg-zinc-950 p-4 flex items-center justify-center h-[100dvh]">
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-10 text-center space-y-4 max-w-md w-full shadow-lg font-sans">
           <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto" />
           <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-150">შესაბამისი კითხვები ვერ მოიძებნა</h3>
@@ -660,8 +660,8 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
       {showPrompt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-lg space-y-4 font-sans animate-in zoom-in-95 duration-200">
-            <h3 className="text-base font-bold text-zinc-850 dark:text-zinc-100 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-indigo-505" />
+            <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
+              <Clock className="w-5 h-5 text-indigo-500" />
               გსურთ გაგრძელება?
             </h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
@@ -670,7 +670,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
             <div className="flex gap-2 text-xs font-bold pt-2 justify-end">
               <button
                 onClick={() => handleResumeDecision(false)}
-                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-650 dark:text-zinc-350 rounded-xl hover:bg-zinc-55 dark:hover:bg-zinc-950 transition cursor-pointer"
+                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350 rounded-xl hover:bg-zinc-55 dark:hover:bg-zinc-950 transition cursor-pointer"
               >
                 თავიდან დაწყება
               </button>
@@ -690,25 +690,25 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
         <div className="flex items-center gap-2.5 min-w-0">
           <button
             onClick={onGoBack}
-            className="p-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 rounded-xl text-zinc-550 transition cursor-pointer shrink-0"
+            className="p-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 rounded-xl text-zinc-500 transition cursor-pointer shrink-0"
             title="გამოსვლა"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="min-w-0">
             <span className="block text-[8px] sm:text-[9px] text-zinc-400 font-sans uppercase font-bold tracking-wider">გამოცდის რეჟიმი</span>
-            <h2 className="text-sm sm:text-base font-bold text-zinc-850 dark:text-zinc-150 font-sans leading-tight truncate max-w-[125px] xs:max-w-[180px] sm:max-w-[320px] md:max-w-none">{test?.title}</h2>
+            <h2 className="text-sm sm:text-base font-bold text-zinc-800 dark:text-zinc-150 font-sans leading-tight truncate max-w-[125px] xs:max-w-[180px] sm:max-w-[320px] md:max-w-none">{test?.title}</h2>
           </div>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2.5 justify-end shrink-0 ml-auto">
           {/* Compact timers */}
           <div className="flex items-center gap-1.5">
-            <div className="p-1 px-2.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-lg font-sans text-center shrink-0">
+            <div className="p-1 px-2.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg font-sans text-center shrink-0">
               <span className="text-[10px] sm:text-xs font-bold font-mono text-indigo-600 dark:text-indigo-400">{formatTime(seconds)}</span>
             </div>
 
-            <div className="p-1 px-2.5 bg-zinc-55 dark:bg-zinc-955 border border-zinc-150 dark:border-zinc-805 rounded-lg font-sans text-center shrink-0">
+            <div className="p-1 px-2.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg font-sans text-center shrink-0">
               <span className="text-[10px] sm:text-xs font-semibold text-zinc-500 font-sans">დარჩა {activeQuestionsPool.length - (currentIdx + 1)}</span>
             </div>
           </div>
@@ -736,7 +736,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
           }}
           className={`flex flex-row items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
             !onlyWrong && !onlySessionWrong && !onlyFlagged
-              ? 'bg-indigo-650 text-white shadow-xs'
+              ? 'bg-indigo-600 text-white shadow-xs'
               : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 bg-white/45 dark:bg-zinc-950/20 hover:bg-white dark:hover:bg-zinc-950/50'
           }`}
         >
@@ -744,7 +744,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
           <span className={`px-1.5 py-0.5 text-[9px] font-black rounded ${
             !onlyWrong && !onlySessionWrong && !onlyFlagged
               ? 'bg-indigo-500 text-white'
-              : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-650'
+              : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-600'
           }`}>
             {questions.length}
           </span>
@@ -806,15 +806,15 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
       {/* Main interactive testing layout (Fully Adaptive & Screen-fitting scrollable) */}
       <div className="flex-1 min-h-0 flex flex-col w-full max-w-4xl mx-auto mt-2 sm:mt-3">
         {currentQ && (
-          <div className="flex-1 min-h-0 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-850 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col justify-between overflow-hidden">
+          <div className="flex-1 min-h-0 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-xs flex flex-col justify-between overflow-hidden">
             
             {/* Upper interactive scroll area (Question text + options list have their own absolute scroll box) */}
             <div className="flex-1 min-h-0 overflow-y-auto pr-1 space-y-4">
               
               {/* Question metadata and text - remains beautifully visible inside scroll list but doesn't scroll whole page */}
-              <div className="space-y-1.5 shrink-0 border-b border-zinc-100 dark:border-zinc-850 pb-3">
+              <div className="space-y-1.5 shrink-0 border-b border-zinc-100 dark:border-zinc-800 pb-3">
                 <div className="flex justify-between items-center text-[10px] font-sans text-zinc-400 font-bold uppercase tracking-wider">
-                  <span className="flex items-center gap-1 text-indigo-505 dark:text-indigo-400">
+                  <span className="flex items-center gap-1 text-indigo-500 dark:text-indigo-400">
                     <QuestionIcon className="w-3.5 h-3.5" />
                     ორიგინალი კითხვა #{currentQ.originalIndex}
                   </span>
@@ -827,7 +827,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                     )}
                   </div>
                 </div>
-                <h3 className="text-sm sm:text-base font-semibold text-zinc-850 dark:text-zinc-150 font-sans leading-relaxed">
+                <h3 className="text-sm sm:text-base font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-relaxed">
                   {currentQ.questionText}
                 </h3>
               </div>
@@ -851,7 +851,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                     if (isCorrectAnswerIdx) {
                       tileClass = 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-700 dark:text-emerald-400 font-semibold ring-2 ring-emerald-500/20';
                     } else if (isSelected) {
-                      tileClass = 'border-rose-500 bg-rose-50/55 dark:bg-rose-955/20 text-rose-700 dark:text-rose-400 ring-2 ring-rose-500/20';
+                      tileClass = 'border-rose-500 bg-rose-50/55 dark:bg-rose-950/20 text-rose-700 dark:text-rose-400 ring-2 ring-rose-500/20';
                     }
                   }
 
@@ -878,7 +878,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
 
               {/* Feedback banner (rendered and scrolled beautifully in list without pushing navigation buttons off-screen) */}
               {checked && (
-                <div className="flex flex-col items-center justify-center py-2 border-t border-zinc-100/50 dark:border-zinc-850 animate-in zoom-in-95 duration-200 shrink-0">
+                <div className="flex flex-col items-center justify-center py-2 border-t border-zinc-100/50 dark:border-zinc-800 animate-in zoom-in-95 duration-200 shrink-0">
                   {selectedOpt !== null && selectedOpt === currentQ.correctOptionIndex ? (
                     <div className="flex flex-col items-center gap-1">
                       <span className="text-4xl drop-shadow-xs select-none">✅</span>
@@ -895,7 +895,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
             </div>
 
             {/* Bottom Progress & Single Horizontal Control Bar - ABSOLUTELY FIXED AT THE BOTTOM CARD PORT */}
-            <div className="mt-3.5 pt-3 border-t border-zinc-100 dark:border-zinc-850 shrink-0 space-y-3">
+            <div className="mt-3.5 pt-3 border-t border-zinc-100 dark:border-zinc-800 shrink-0 space-y-3">
               
               {/* Progress visual indicators */}
               <div className="space-y-1">
@@ -905,7 +905,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                 </div>
                 <div className="w-full bg-zinc-100 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
                   <div 
-                    className="bg-indigo-650 dark:bg-indigo-500 h-1.5 transition-all duration-300" 
+                    className="bg-indigo-600 dark:bg-indigo-500 h-1.5 transition-all duration-300" 
                     style={{ width: `${((currentIdx + 1) / activeQuestionsPool.length) * 100}%` }}
                   />
                 </div>
@@ -925,7 +925,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                   <button
                     disabled={currentIdx === activeQuestionsPool.length - 1}
                     onClick={handleNext}
-                    className="px-5 py-2.5 sm:px-8 bg-indigo-600 hover:bg-indigo-750 disabled:bg-indigo-300 disabled:opacity-40 text-xs sm:text-sm font-bold text-white rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-md"
+                    className="px-5 py-2.5 sm:px-8 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 disabled:opacity-40 text-xs sm:text-sm font-bold text-white rounded-xl transition cursor-pointer flex items-center justify-center gap-1 shadow-md"
                   >
                     შემდეგი ▶
                   </button>
@@ -935,7 +935,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                     className={`p-2.5 border rounded-xl transition cursor-pointer ${
                       flaggedIds.includes(currentQ.id)
                         ? 'bg-amber-50 dark:bg-amber-950/20 border-amber-300 text-amber-600'
-                        : 'border-zinc-200 dark:border-zinc-800 text-zinc-455 hover:bg-zinc-50 dark:hover:bg-zinc-950'
+                        : 'border-zinc-200 dark:border-zinc-800 text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-950'
                     }`}
                     title="გადასამეორებლად მონიშვნა"
                   >
@@ -953,9 +953,9 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
       {showTools && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-2xl w-full shadow-2xl space-y-6 font-sans flex flex-col max-h-[90vh] overflow-hidden">
-            <div className="flex items-center justify-between border-b border-zinc-150 dark:border-zinc-805 pb-3">
-              <h3 className="text-base font-bold text-zinc-850 dark:text-zinc-105 flex items-center gap-2">
-                <SlidersHorizontal className="w-5 h-5 text-indigo-505" />
+            <div className="flex items-center justify-between border-b border-zinc-150 dark:border-zinc-800 pb-3">
+              <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-105 flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5 text-indigo-500" />
                 ხელსაწყოები და ფილტრები
               </h3>
               <button 
@@ -968,7 +968,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
 
             <div className="space-y-6 overflow-y-auto pr-1 flex-1 text-zinc-800 dark:text-zinc-200">
               {/* Quick stats and precision summary */}
-              <div className="bg-zinc-50 dark:bg-zinc-955 rounded-xl p-4 border border-zinc-150 dark:border-zinc-805 space-y-3">
+              <div className="bg-zinc-50 dark:bg-zinc-950 rounded-xl p-4 border border-zinc-150 dark:border-zinc-800 space-y-3">
                 <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider">სესია და შედეგები</h4>
                 <div className="grid grid-cols-3 gap-3 text-center">
                   <div className="p-2 border border-emerald-100 dark:border-emerald-950 bg-emerald-50/20 text-emerald-600 rounded-lg">
@@ -990,7 +990,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
               <div className="space-y-3">
                 <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider">მართვის პარამეტრები</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <label className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-150 dark:border-zinc-805 cursor-pointer text-xs font-sans transition">
+                  <label className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-150 dark:border-zinc-800 cursor-pointer text-xs font-sans transition">
                     <span className="font-bold">ავტომატური გადასვლა</span>
                     <input
                       type="checkbox"
@@ -1002,7 +1002,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
 
                   <button
                     onClick={() => setImmediateShow(!immediateShow)}
-                    className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-955 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-155 dark:border-zinc-805 text-xs font-sans text-left transition cursor-pointer"
+                    className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-155 dark:border-zinc-800 text-xs font-sans text-left transition cursor-pointer"
                   >
                     <div className="flex items-center gap-1.5 font-bold">
                       {immediateShow ? <Eye className="w-4 h-4 text-emerald-500" /> : <EyeOff className="w-4 h-4 text-zinc-400" />}
@@ -1013,7 +1013,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
 
                    <button
                     onClick={() => setExamMode(!examMode)}
-                    className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-955 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-155 dark:border-zinc-805 text-xs font-sans transition cursor-pointer"
+                    className="flex items-center justify-between p-3 bg-zinc-50 dark:bg-zinc-950 hover:bg-zinc-100/60 dark:hover:bg-zinc-950/60 rounded-xl border border-zinc-155 dark:border-zinc-800 text-xs font-sans transition cursor-pointer"
                   >
                     <span className="font-bold">საიმიტაციო გამოცდა</span>
                     <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${examMode ? 'bg-rose-50 text-rose-600' : 'bg-emerald-50 text-emerald-600'}`}>
@@ -1052,23 +1052,23 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                   <button
                     onClick={shuffleQuestions}
-                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 dark:hover:bg-zinc-850 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-805 transition text-center gap-1 text-[11px] cursor-pointer"
+                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-800 transition text-center gap-1 text-[11px] cursor-pointer"
                   >
-                    <Shuffle className="w-4 h-4 text-indigo-505" />
+                    <Shuffle className="w-4 h-4 text-indigo-500" />
                     ბაზის არევა
                   </button>
 
                   <button
                     onClick={resetQuestionsOrder}
-                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 dark:hover:bg-zinc-850 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-805 transition text-center gap-1 text-[11px] cursor-pointer"
+                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-800 transition text-center gap-1 text-[11px] cursor-pointer"
                   >
-                    <RotateCcw className="w-4 h-4 text-indigo-505" />
+                    <RotateCcw className="w-4 h-4 text-indigo-500" />
                     თავდაპირველი რიგი
                   </button>
 
                   <button
                     onClick={shuffleCurrentAnswers}
-                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 dark:hover:bg-zinc-850 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-805 transition text-center gap-1 text-[11px] cursor-pointer"
+                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-800 transition text-center gap-1 text-[11px] cursor-pointer"
                   >
                     <Shuffle className="w-4 h-4 text-emerald-505" />
                     პასუხების არევა
@@ -1076,7 +1076,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
 
                   <button
                     onClick={sortQuestionsAlphabetically}
-                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 dark:hover:bg-zinc-850 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-805 transition text-center gap-1 text-[11px] cursor-pointer"
+                    className="flex flex-col items-center justify-center p-3 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 dark:hover:bg-zinc-800 rounded-xl text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-100 dark:border-zinc-800 transition text-center gap-1 text-[11px] cursor-pointer"
                   >
                     <SortAsc className="w-4 h-4 text-amber-505" />
                     A-Z სორტირება
@@ -1104,7 +1104,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                         value={searchCorrect}
                         onChange={(e) => { setSearchCorrect(e.target.value); setCurrentIdx(0); }}
                         placeholder="მოძებნე ტექსტი..."
-                        className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border border-zinc-200 dark:border-zinc-855 bg-zinc-55 dark:bg-zinc-950 text-zinc-850 dark:text-zinc-200 outline-hidden"
+                        className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 outline-hidden"
                       />
                       <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-2" />
                     </div>
@@ -1118,7 +1118,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                         value={searchIncorrect}
                         onChange={(e) => { setSearchIncorrect(e.target.value); setCurrentIdx(0); }}
                         placeholder="მოძებნე ტექსტი..."
-                        className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border border-zinc-200 dark:border-zinc-855 bg-zinc-55 dark:bg-zinc-950 text-zinc-855 dark:text-zinc-200 outline-hidden"
+                        className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 outline-hidden"
                       />
                       <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-2" />
                     </div>
@@ -1127,13 +1127,13 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                   <div className="flex gap-2 pt-1 font-semibold text-xs col-span-1 sm:col-span-2">
                     <button
                       onClick={exciseCurrentQuestion}
-                      className="flex-1 flex items-center justify-center gap-1 py-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 text-zinc-700 dark:text-zinc-300 rounded-xl hover:text-rose-600 transition cursor-pointer border border-zinc-200 dark:border-zinc-800"
+                      className="flex-1 flex items-center justify-center gap-1 py-2 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 text-zinc-700 dark:text-zinc-300 rounded-xl hover:text-rose-600 transition cursor-pointer border border-zinc-200 dark:border-zinc-800"
                     >
                       <Scissors className="w-3.5 h-3.5" /> კითხვის ამოჭრა
                     </button>
                     <button
                       onClick={toggleHideCurrentQuestion}
-                      className="flex-1 flex items-center justify-center gap-1 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-955 text-zinc-700 dark:text-zinc-300 rounded-xl transition cursor-pointer border border-zinc-200 dark:border-zinc-800"
+                      className="flex-1 flex items-center justify-center gap-1 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-950 text-zinc-700 dark:text-zinc-300 rounded-xl transition cursor-pointer border border-zinc-200 dark:border-zinc-800"
                       title="მიმდინარე კითხვის დროებითი დამალვა"
                     >
                       <Trash2 className="w-3.5 h-3.5" /> დამალვა/ჩვენება
@@ -1143,7 +1143,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
               </div>
 
               {/* Quick jump input widget inside filters modal */}
-              <div className="space-y-2 pt-2 border-t border-zinc-150 dark:border-zinc-805">
+              <div className="space-y-2 pt-2 border-t border-zinc-150 dark:border-zinc-800">
                 <span className="text-xs text-zinc-500 font-sans font-semibold">გადასვლა კონკრეტულ კოდზე / ნომერზე:</span>
                 <form 
                   onSubmit={(e) => {
@@ -1163,7 +1163,7 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
                   />
                   <button
                     type="submit"
-                    className="px-4 py-1.5 bg-indigo-650 hover:bg-indigo-750 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer"
+                    className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition cursor-pointer"
                   >
                     გადასვლა
                   </button>
@@ -1171,33 +1171,33 @@ export const TestPracticePage: React.FC<TestPracticePageProps> = ({ testId, onGo
               </div>
 
               {/* Answers distribution diagram */}
-              <div className="space-y-2 pt-2 border-t border-zinc-150 dark:border-zinc-805">
+              <div className="space-y-2 pt-2 border-t border-zinc-150 dark:border-zinc-800">
                 <h4 className="font-bold text-xs text-zinc-500 uppercase tracking-wider flex items-center gap-1">
                   <BarChart className="w-4 h-4 text-emerald-555" /> პასუხების განაწილება
                 </h4>
                 <div className="grid grid-cols-4 gap-2 text-center font-mono text-xs">
-                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-lg">
+                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg">
                     <span className="block text-[8px] text-zinc-400">A</span>
-                    <span className="font-bold text-zinc-750 dark:text-zinc-200">{positionStats.A}%</span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">{positionStats.A}%</span>
                   </div>
-                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-lg">
+                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg">
                     <span className="block text-[8px] text-zinc-400">B</span>
-                    <span className="font-bold text-zinc-750 dark:text-zinc-200">{positionStats.B}%</span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">{positionStats.B}%</span>
                   </div>
-                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-lg">
+                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg">
                     <span className="block text-[8px] text-zinc-400">C</span>
-                    <span className="font-bold text-zinc-750 dark:text-zinc-200">{positionStats.C}%</span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">{positionStats.C}%</span>
                   </div>
-                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-lg">
+                  <div className="p-1.5 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-lg">
                     <span className="block text-[8px] text-zinc-400">D</span>
-                    <span className="font-bold text-zinc-750 dark:text-zinc-200">{positionStats.D}%</span>
+                    <span className="font-bold text-zinc-700 dark:text-zinc-200">{positionStats.D}%</span>
                   </div>
                 </div>
                 <p className="text-[10px] text-zinc-400 italic text-center">ეს დიაგრამა აჩვენებს სწორი პასუხების განაწილებას (A/B/C/D პოზიციებზე) მიმდინარე ტესტში.</p>
               </div>
             </div>
 
-            <div className="flex justify-end pt-3 border-t border-zinc-150 dark:border-zinc-805">
+            <div className="flex justify-end pt-3 border-t border-zinc-150 dark:border-zinc-800">
               <button
                 onClick={() => setShowTools(false)}
                 className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition cursor-pointer"

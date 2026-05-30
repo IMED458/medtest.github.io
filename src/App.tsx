@@ -60,12 +60,12 @@ const AppContent: React.FC = () => {
   // Login Screen component
   if (!user) {
     return (
-      <div className={`min-h-screen ${theme === 'dark' ? 'bg-zinc-950 text-white' : 'bg-slate-50/50 text-zinc-900'} flex flex-col justify-between p-6 transition-colors duration-200`}>
+      <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-white flex flex-col justify-between p-6 transition-colors duration-200">
         {/* Top bar with theme only switch */}
         <div className="flex justify-end">
           <button
             onClick={toggleTheme}
-            className="p-3 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-650 dark:text-zinc-350 transition flex items-center justify-center cursor-pointer shadow-xs"
+            className="p-3 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-350 transition flex items-center justify-center cursor-pointer shadow-xs"
             title="რეჟიმის შეცვლა"
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
@@ -73,28 +73,28 @@ const AppContent: React.FC = () => {
         </div>
 
         {/* Hero Auth Card */}
-        <div className="max-w-md w-full mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-3xl p-8 space-y-8 shadow-xs text-center">
+        <div className="max-w-md w-full mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 space-y-8 shadow-xs text-center">
           <div className="space-y-3">
-            <div className="w-16 h-16 bg-indigo-50 dark:bg-zinc-950 border border-indigo-100 dark:border-indigo-950 rounded-2xl flex items-center justify-center mx-auto text-indigo-650 dark:text-indigo-400">
+            <div className="w-16 h-16 bg-indigo-50 dark:bg-zinc-950 border border-indigo-100 dark:border-indigo-950 rounded-2xl flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400">
               <GraduationCap className="w-9 h-9" />
             </div>
             
             <div className="space-y-1 font-sans">
-              <h1 className="text-2xl font-extrabold tracking-tight text-zinc-850 dark:text-zinc-100">
+              <h1 className="text-2xl font-extrabold tracking-tight text-zinc-800 dark:text-zinc-100">
                 სტუდენტური პორტალი
               </h1>
               <p className="text-zinc-500 text-xs">გამოცდების მომზადების პროფესიონალური პლატფორმა</p>
             </div>
           </div>
 
-          <p className="text-xs text-zinc-550 dark:text-zinc-400 font-sans leading-relaxed">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans leading-relaxed">
             იმეცადინეთ დამოუკიდებლად, ატვირთეთ თქვენი კონსპექტები / ტესტები TXT და PDF ფორმატში და გააზიარეთ სასწავლო ჯგუფებში.
           </p>
 
           <div className="space-y-3">
             <button
               onClick={() => { playClickSound(); signInWithGoogle(); }}
-              className="w-full flex items-center justify-center gap-2.5 px-4 py-3 border border-zinc-200 dark:border-zinc-805 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-300 transition cursor-pointer shadow-xs"
+              className="w-full flex items-center justify-center gap-2.5 px-4 py-3 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-300 transition cursor-pointer shadow-xs"
             >
               <img 
                 src="https://www.vectorlogo.zone/logos/google/google-icon.svg" 
@@ -128,7 +128,7 @@ const AppContent: React.FC = () => {
   // Active Practice Exam sheets (Focus Mode)
   if (activePracticeTestId) {
     return (
-      <div className={`min-h-screen ${theme === 'dark' ? 'bg-zinc-950 text-white' : 'bg-slate-50/50 text-zinc-900'} p-4 md:p-6 transition-colors duration-200`}>
+      <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-white p-4 md:p-6 transition-colors duration-200">
         <div className="max-w-6xl mx-auto">
           <TestPracticePage 
             testId={activePracticeTestId}
@@ -140,10 +140,10 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-zinc-950 text-white' : 'bg-slate-50/50 text-zinc-900'} flex transition-colors duration-200 font-sans`}>
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-white flex transition-colors duration-200 font-sans">
       
       {/* Desktop Navigation Rails (Sidebar) */}
-      <aside className="hidden lg:flex flex-col justify-between w-64 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-805 shrink-0">
+      <aside className="hidden lg:flex flex-col justify-between w-64 bg-white dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 shrink-0">
         <div className="p-5 space-y-6">
           
           {/* Logo badge */}
@@ -152,7 +152,7 @@ const AppContent: React.FC = () => {
               <GraduationCap className="w-5 h-5" />
             </div>
             <div>
-              <span className="block font-sans font-bold text-xs tracking-tight text-zinc-850 dark:text-zinc-50">საგამოცდო კერა</span>
+              <span className="block font-sans font-bold text-xs tracking-tight text-zinc-800 dark:text-zinc-50">საგამოცდო კერა</span>
               <span className="block text-[9px] text-zinc-450 dark:text-zinc-500 uppercase font-black">საქართველო</span>
             </div>
           </div>
@@ -163,7 +163,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('library'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'library' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -175,7 +175,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('upload'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'upload' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -187,7 +187,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('my-uploads'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'my-uploads' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -199,7 +199,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('groups'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'groups' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -211,7 +211,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('auscultations'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'auscultations' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -223,7 +223,7 @@ const AppContent: React.FC = () => {
               onClick={() => { playClickSound(); setActiveSection('stats'); setSelectedGroupId(null); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                 activeSection === 'stats' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
+                  ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400' 
                   : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
               }`}
             >
@@ -237,7 +237,7 @@ const AppContent: React.FC = () => {
                 onClick={() => { playClickSound(); setActiveSection('admin'); setSelectedGroupId(null); }}
                 className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
                   activeSection === 'admin'
-                    ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400'
+                    ? 'bg-indigo-50 text-indigo-600 dark:bg-zinc-950 dark:text-indigo-400'
                     : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
                 }`}
               >
@@ -249,7 +249,7 @@ const AppContent: React.FC = () => {
         </div>
 
         {/* Profile Card & LogOut */}
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-805 space-y-3 font-sans">
+        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 space-y-3 font-sans">
           <div className="flex items-center gap-2.5">
             <img
               src={user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${user.uid}`}
@@ -265,7 +265,7 @@ const AppContent: React.FC = () => {
 
           <button
             onClick={() => { playClickSound(); signOutUser(); }}
-            className="w-full flex items-center justify-center gap-1.5 px-3 py-2 border border-rose-100 hover:bg-rose-50 dark:border-rose-950 dark:hover:bg-rose-955/20 text-rose-600 rounded-xl text-xs font-semibold cursor-pointer transition"
+            className="w-full flex items-center justify-center gap-1.5 px-3 py-2 border border-rose-100 hover:bg-rose-50 dark:border-rose-950 dark:hover:bg-rose-950/20 text-rose-600 rounded-xl text-xs font-semibold cursor-pointer transition"
           >
             <LogOut className="w-3.5 h-3.5" /> გამოსვლა
           </button>
@@ -276,21 +276,21 @@ const AppContent: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0 pb-20 lg:pb-0">
         
         {/* Top Header Controls Bar */}
-        <header className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-805 p-4 flex items-center justify-between shadow-xs sticky top-0 z-40">
+        <header className="bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 flex items-center justify-between shadow-xs sticky top-0 z-40">
           <div className="flex items-center gap-2 lg:hidden">
             <GraduationCap className="w-6 h-6 text-indigo-600" />
             <span className="font-bold text-sm tracking-tight text-zinc-800 dark:text-zinc-200">საგამოცდო კლასები</span>
           </div>
 
           <div className="hidden lg:block">
-            <span className="text-xs text-zinc-405 dark:text-zinc-400 font-sans">მოგესალმებით, <strong className="text-zinc-700 dark:text-zinc-200">{user.displayName}</strong> 👋</span>
+            <span className="text-xs text-zinc-400 dark:text-zinc-400 font-sans">მოგესალმებით, <strong className="text-zinc-700 dark:text-zinc-200">{user.displayName}</strong> 👋</span>
           </div>
 
           {/* Theme Switcher Toggle (Icons only as requested) */}
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-850 text-zinc-650 dark:text-zinc-350 transition flex items-center justify-center cursor-pointer"
+              className="p-2 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-slate-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-350 transition flex items-center justify-center cursor-pointer"
               title="რეჟიმის შეცვლა"
             >
               {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
@@ -321,10 +321,10 @@ const AppContent: React.FC = () => {
       </div>
 
       {/* Mobile Navigation tab bar */}
-      <nav className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-zinc-900 border-t border-zinc-250 dark:border-zinc-805 flex justify-around p-2.5 z-55 shadow-md">
+      <nav className="fixed bottom-0 left-0 right-0 lg:hidden bg-white dark:bg-zinc-900 border-t border-zinc-250 dark:border-zinc-800 flex justify-around p-2.5 z-55 shadow-md">
         <button
           onClick={() => { playClickSound(); setActiveSection('library'); setSelectedGroupId(null); }}
-          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'library' ? 'text-indigo-650 dark:text-indigo-400 font-bold' : 'text-zinc-405 dark:text-zinc-455'}`}
+          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'library' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-zinc-400 dark:text-zinc-400'}`}
         >
           <BookOpen className="w-4 h-4" />
           <span className="text-[10px]">ტესტები</span>
@@ -332,7 +332,7 @@ const AppContent: React.FC = () => {
 
         <button
           onClick={() => { playClickSound(); setActiveSection('upload'); setSelectedGroupId(null); }}
-          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'upload' ? 'text-indigo-650 dark:text-indigo-400 font-bold' : 'text-zinc-405 dark:text-zinc-455'}`}
+          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'upload' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-zinc-400 dark:text-zinc-400'}`}
         >
           <Upload className="w-4 h-4" />
           <span className="text-[10px]">ატვირთვა</span>
@@ -340,7 +340,7 @@ const AppContent: React.FC = () => {
 
         <button
           onClick={() => { playClickSound(); setActiveSection('my-uploads'); setSelectedGroupId(null); }}
-          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'my-uploads' ? 'text-indigo-650 dark:text-indigo-400 font-bold' : 'text-zinc-405 dark:text-zinc-455'}`}
+          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'my-uploads' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-zinc-400 dark:text-zinc-400'}`}
         >
           <FolderLock className="w-4 h-4" />
           <span className="text-[10px]">ჩემი</span>
@@ -348,7 +348,7 @@ const AppContent: React.FC = () => {
 
         <button
           onClick={() => { playClickSound(); setActiveSection('groups'); setSelectedGroupId(null); }}
-          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'groups' ? 'text-indigo-650 dark:text-indigo-400 font-bold' : 'text-zinc-405 dark:text-zinc-455'}`}
+          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'groups' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-zinc-400 dark:text-zinc-400'}`}
         >
           <Users className="w-4 h-4" />
           <span className="text-[10px]">ჯგუფები</span>
@@ -356,7 +356,7 @@ const AppContent: React.FC = () => {
 
         <button
           onClick={() => { playClickSound(); setActiveSection('stats'); setSelectedGroupId(null); }}
-          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'stats' ? 'text-indigo-650 dark:text-indigo-400 font-bold' : 'text-zinc-405 dark:text-zinc-455'}`}
+          className={`flex flex-col items-center gap-0.5 text-xs font-sans ${activeSection === 'stats' ? 'text-indigo-600 dark:text-indigo-400 font-bold' : 'text-zinc-400 dark:text-zinc-400'}`}
         >
           <BarChart className="w-4 h-4" />
           <span className="text-[10px]">სტატისტიკა</span>

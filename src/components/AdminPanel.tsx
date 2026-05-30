@@ -80,7 +80,7 @@ export const AdminPanel: React.FC = () => {
 
   if (!isAdmin) {
     return (
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-2xl p-8 max-w-lg mx-auto text-center space-y-4 font-sans">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 max-w-lg mx-auto text-center space-y-4 font-sans">
         <ShieldAlert className="w-12 h-12 text-rose-500 mx-auto" />
         <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-150">წვდომა შეზღუდულია</h2>
         <p className="text-zinc-500 text-xs leading-relaxed">
@@ -94,7 +94,7 @@ export const AdminPanel: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-650 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს სისტემის მონაცემების ჩატვირთვა...</p>
+        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს სისტემის მონაცემების ჩატვირთვა...</p>
       </div>
     );
   }
@@ -103,7 +103,7 @@ export const AdminPanel: React.FC = () => {
     <div id="admin-panel" className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-zinc-850 dark:text-zinc-100 font-sans tracking-tight">
+          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 font-sans tracking-tight">
             Dev & Admin Panel / მართვის პანელი
           </h2>
           <p className="text-xs text-zinc-500 font-sans">სისტემის ცენტრალიზებული მონიტორინგი და ტექნიკური ლოგები</p>
@@ -113,7 +113,7 @@ export const AdminPanel: React.FC = () => {
 
       {/* Grid of system diagnostics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-zinc-800 dark:text-zinc-200">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-xl p-4 flex items-center gap-3">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Users className="w-5 h-5 text-indigo-500" />
           <div className="font-sans">
             <span className="block text-[10px] text-zinc-400 uppercase font-bold">მომხმარებლები</span>
@@ -121,7 +121,7 @@ export const AdminPanel: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-xl p-4 flex items-center gap-3">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Layers className="w-5 h-5 text-emerald-500" />
           <div className="font-sans">
             <span className="block text-[10px] text-zinc-400 uppercase font-bold">ჯგუფები</span>
@@ -129,7 +129,7 @@ export const AdminPanel: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-xl p-4 flex items-center gap-3">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <FileText className="w-5 h-5 text-amber-500" />
           <div className="font-sans">
             <span className="block text-[10px] text-zinc-400 uppercase font-bold">ტესტები</span>
@@ -137,7 +137,7 @@ export const AdminPanel: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-xl p-4 flex items-center gap-3">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Database className="w-5 h-5 text-rose-550" />
           <div className="font-sans">
             <span className="block text-[10px] text-zinc-400 uppercase font-bold">Storage Usage</span>
@@ -149,13 +149,13 @@ export const AdminPanel: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* PDF Processor Activity Log */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-xs font-sans font-sans">
-          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-805 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
+          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
             <FileCheck className="w-4 h-4 text-emerald-500" /> ფაილების დამუშავების ისტორია
           </h3>
 
           <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
             {parserLogs.map((log) => (
-              <div key={log.id} className="p-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-805 rounded-xl text-xs space-y-1">
+              <div key={log.id} className="p-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 rounded-xl text-xs space-y-1">
                 <div className="flex justify-between font-semibold">
                   <span className="text-zinc-700 dark:text-zinc-200 truncate max-w-[70%]">{log.filename}</span>
                   <span className={`px-1.5 py-0.5 rounded-full text-[9px] font-bold ${
@@ -175,13 +175,13 @@ export const AdminPanel: React.FC = () => {
 
         {/* Audit Logs */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-xs font-sans">
-          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-805 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
+          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
             <Terminal className="w-4 h-4 text-indigo-500 animate-pulse" /> Console Audit Logs
           </h3>
 
           <div className="space-y-2 max-h-60 overflow-y-auto font-mono text-[10px]">
             {auditLogs.map((log) => (
-              <div key={log.id} className="p-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-805 rounded-lg flex justify-between items-start gap-3">
+              <div key={log.id} className="p-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 rounded-lg flex justify-between items-start gap-3">
                 <div className="space-y-0.5 min-w-0">
                   <span className="text-zinc-400">[{log.source}]</span>
                   <p className="text-zinc-700 dark:text-zinc-300 truncate">{log.action}</p>

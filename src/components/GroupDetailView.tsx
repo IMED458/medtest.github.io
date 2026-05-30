@@ -153,7 +153,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-650 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს ჯგუფის ინფორმაციის ჩატვირთვა...</p>
+        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს ჯგუფის ინფორმაციის ჩატვირთვა...</p>
       </div>
     );
   }
@@ -164,14 +164,14 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-xs relative overflow-hidden">
         <button
           onClick={() => { playClickSound(); onGoBack(); }}
-          className="flex items-center gap-1.5 text-xs text-indigo-650 dark:text-indigo-400 font-semibold mb-4 hover:underline transition"
+          className="flex items-center gap-1.5 text-xs text-indigo-600 dark:text-indigo-400 font-semibold mb-4 hover:underline transition"
         >
           <ArrowLeft className="w-4 h-4" /> უკან დაბრუნება
         </button>
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-zinc-850 dark:text-zinc-150 font-sans tracking-tight">
+            <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-150 font-sans tracking-tight">
               {group.name}
             </h2>
             <p className="text-zinc-450 dark:text-zinc-400 text-xs font-sans mt-1">
@@ -180,14 +180,14 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="p-3 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-805 rounded-xl flex items-center gap-2">
+            <div className="p-3 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-xl flex items-center gap-2">
               <div>
                 <span className="block text-[9px] text-zinc-400 font-sans uppercase font-bold tracking-wider">მოწვევის კოდი</span>
                 <span className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{group.code}</span>
               </div>
               <button
                 onClick={handleCopyCode}
-                className="p-1 px-1.5 hover:bg-zinc-150 dark:hover:bg-zinc-850 rounded-lg text-zinc-500 hover:text-indigo-500 transition"
+                className="p-1 px-1.5 hover:bg-zinc-150 dark:hover:bg-zinc-800 rounded-lg text-zinc-500 hover:text-indigo-500 transition"
                 title="კოდის კოპირება"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -204,7 +204,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'chat' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-455 hover:text-zinc-350'
+              : 'text-zinc-400 hover:text-zinc-350'
           }`}
         >
           <MessageSquare className="w-4 h-4" />
@@ -219,7 +219,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'tests' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-455 hover:text-zinc-350'
+              : 'text-zinc-400 hover:text-zinc-350'
           }`}
         >
           <BookOpen className="w-4 h-4" />
@@ -234,7 +234,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'members' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-455 hover:text-zinc-350'
+              : 'text-zinc-400 hover:text-zinc-350'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -280,7 +280,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                       <div className={`p-3 rounded-2xl text-xs font-sans whitespace-pre-wrap ${
                         isMe 
                           ? 'bg-indigo-600 text-white rounded-tr-none' 
-                          : 'bg-zinc-100 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-250 rounded-tl-none border border-zinc-150 dark:border-zinc-805'
+                          : 'bg-zinc-100 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-250 rounded-tl-none border border-zinc-150 dark:border-zinc-800'
                       }`}>
                         {msg.text}
                       </div>
@@ -315,7 +315,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
       {activeTab === 'tests' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-semibold text-zinc-850 dark:text-zinc-200 font-sans">გაზიარებული ტესტები</h3>
+            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200 font-sans">გაზიარებული ტესტები</h3>
             <span className="text-xs text-zinc-450 font-sans font-semibold">სულ გაზიარებული: {sharedTests.length}</span>
           </div>
 
@@ -349,10 +349,10 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-805">
+                    <div className="flex gap-2 mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
                       <button
                         onClick={() => { playClickSound(); onStartTest(test.id, false); }}
-                        className="flex-1 flex items-center justify-center gap-1 py-1.5 px-3 bg-indigo-50 hover:bg-indigo-100 dark:bg-zinc-950 dark:hover:bg-zinc-850 text-indigo-600 dark:text-indigo-400 font-bold text-[11px] rounded-lg transition"
+                        className="flex-1 flex items-center justify-center gap-1 py-1.5 px-3 bg-indigo-50 hover:bg-indigo-100 dark:bg-zinc-950 dark:hover:bg-zinc-800 text-indigo-600 dark:text-indigo-400 font-bold text-[11px] rounded-lg transition"
                       >
                         <Play className="w-3.5 h-3.5 fill-current" />
                         გავლა
@@ -385,7 +385,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
             <span className="text-zinc-500 font-mono">წევრები: {members.length}</span>
           </div>
 
-          <div className="divide-y divide-zinc-100 dark:divide-zinc-805">
+          <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {members.map((member) => (
               <div key={member.userId} className="py-3 flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2.5">
