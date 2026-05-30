@@ -70,7 +70,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-500 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს ტესტების ბიბლიოთეკის ჩატვირთვა...</p>
+        <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans text-sm animate-pulse">მიმდინარეობს ტესტების ბიბლიოთეკის ჩატვირთვა...</p>
       </div>
     );
   }
@@ -82,7 +82,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
           <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 font-sans tracking-tight">
             ტესტების ბიბლიოთეკა
           </h2>
-          <p className="text-xs text-zinc-500 font-sans mt-0.5">გაიარეთ ნებისმიერი ატვირთული ტესტი და მოემზადეთ გამოცდისთვის</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mt-0.5">გაიარეთ ნებისმიერი ატვირთული ტესტი და მოემზადეთ გამოცდისთვის</p>
         </div>
         
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
@@ -92,18 +92,18 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
               placeholder="მოძებნეთ სათაურით..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
             />
-            <Search className="w-4 h-4 text-zinc-450 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-zinc-450 dark:text-zinc-400 dark:text-zinc-500 absolute left-3 top-2.5" />
           </div>
         </div>
       </div>
 
       {filteredTests.length === 0 ? (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
-          <BookOpen className="w-12 h-12 text-zinc-350 dark:text-zinc-700 mb-4" />
+          <BookOpen className="w-12 h-12 text-zinc-350 dark:text-zinc-500 dark:text-zinc-700 mb-4" />
           <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">ტესტები ვერ მოიძებნა</h3>
-          <p className="text-zinc-500 text-xs font-sans max-w-sm leading-relaxed">
+          <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm leading-relaxed">
             {searchTerm ? 'მოცემული საძიებო პარამეტრით ტესტი ვერ მოიძებნა.' : 'ბიბლიოთეკა ცარიელია. ატვირთეთ პირველი ტესტი "ატვირთვა" განყოფილებიდან.'}
           </p>
         </div>
@@ -120,22 +120,22 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
                 className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 rounded-2xl p-5 shadow-xs transition flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-tight line-clamp-2 mb-2 min-h-10">
+                  <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans leading-tight line-clamp-2 mb-2 min-h-10">
                     {test.title}
                   </h3>
 
-                  <div className="space-y-1.5 text-xs text-zinc-500 dark:text-zinc-400 font-sans mb-4">
+                  <div className="space-y-1.5 text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mb-4">
                     <span className="flex items-center gap-1.5 truncate">
-                      <User className="w-3.5 h-3.5 text-zinc-400" />
+                      <User className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
                       <span>{test.creatorName || 'ანონიმური'}</span>
                     </span>
                     <div className="flex justify-between">
                       <span className="flex items-center gap-1.5 font-mono">
-                        <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                        <Calendar className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
                         {new Date(test.createdAt).toLocaleDateString('ka-GE')}
                       </span>
                       <span className="flex items-center gap-1.5 font-mono">
-                        <ClipboardList className="w-3.5 h-3.5 text-zinc-400" />
+                        <ClipboardList className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
                         {test.questionCount} კითხვა
                       </span>
                     </div>
@@ -143,7 +143,7 @@ export const TestLibrarySection: React.FC<TestLibrarySectionProps> = ({ onStartT
 
                   {hasStarted && (
                     <div className="mb-4">
-                      <div className="flex justify-between text-xs font-sans text-zinc-400 mb-1">
+                      <div className="flex justify-between text-xs font-sans text-zinc-400 dark:text-zinc-500 mb-1">
                         <span>პროგრესი {progressPct}%</span>
                         <span className="font-mono">{progress.currentQuestionIndex + 1}/{test.questionCount}</span>
                       </div>

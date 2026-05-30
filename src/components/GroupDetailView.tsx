@@ -153,7 +153,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს ჯგუფის ინფორმაციის ჩატვირთვა...</p>
+        <p className="text-zinc-600 dark:text-zinc-300 dark:text-zinc-400 dark:text-zinc-500 font-sans text-sm">მიმდინარეობს ჯგუფის ინფორმაციის ჩატვირთვა...</p>
       </div>
     );
   }
@@ -171,10 +171,10 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-150 font-sans tracking-tight">
+            <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans tracking-tight">
               {group.name}
             </h2>
-            <p className="text-zinc-450 dark:text-zinc-400 text-xs font-sans mt-1">
+            <p className="text-zinc-450 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans mt-1">
               {group.description || 'ჯგუფს აღწერა არ გააჩნია.'}
             </p>
           </div>
@@ -182,12 +182,12 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           <div className="flex items-center gap-3 shrink-0">
             <div className="p-3 bg-zinc-55 dark:bg-zinc-950 border border-zinc-150 dark:border-zinc-800 rounded-xl flex items-center gap-2">
               <div>
-                <span className="block text-[9px] text-zinc-400 font-sans uppercase font-bold tracking-wider">მოწვევის კოდი</span>
-                <span className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{group.code}</span>
+                <span className="block text-[9px] text-zinc-400 dark:text-zinc-500 font-sans uppercase font-bold tracking-wider">მოწვევის კოდი</span>
+                <span className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-100 dark:text-zinc-200">{group.code}</span>
               </div>
               <button
                 onClick={handleCopyCode}
-                className="p-1 px-1.5 hover:bg-zinc-150 dark:hover:bg-zinc-800 rounded-lg text-zinc-500 hover:text-indigo-500 transition"
+                className="p-1 px-1.5 hover:bg-zinc-150 dark:hover:bg-zinc-800 rounded-lg text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 hover:text-indigo-500 transition"
                 title="კოდის კოპირება"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -204,7 +204,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'chat' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-400 hover:text-zinc-350'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-350'
           }`}
         >
           <MessageSquare className="w-4 h-4" />
@@ -219,7 +219,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'tests' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-400 hover:text-zinc-350'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-350'
           }`}
         >
           <BookOpen className="w-4 h-4" />
@@ -234,7 +234,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           className={`pb-3 font-semibold transition flex items-center gap-2 relative ${
             activeTab === 'members' 
               ? 'text-indigo-600 dark:text-indigo-400' 
-              : 'text-zinc-400 hover:text-zinc-350'
+              : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-350'
           }`}
         >
           <Users className="w-4 h-4" />
@@ -252,8 +252,8 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-6">
-                <MessageSquare className="w-10 h-10 text-zinc-300 dark:text-zinc-700 mb-2" />
-                <p className="text-zinc-450 dark:text-zinc-400 text-xs font-sans">
+                <MessageSquare className="w-10 h-10 text-zinc-300 dark:text-zinc-700 dark:text-zinc-200 mb-2" />
+                <p className="text-zinc-450 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans">
                   ჩატში შეტყობინებები ჯერ არ არის. დაწერეთ თქვენი პირველი კითხვა აქ!
                 </p>
               </div>
@@ -272,15 +272,15 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                     />
                     
                     <div className="space-y-1">
-                      <div className={`flex items-center gap-1.5 text-[10px] text-zinc-400 font-sans ${isMe ? 'justify-end' : ''}`}>
-                        <span className="font-semibold text-zinc-700 dark:text-zinc-300">{msg.userName}</span>
+                      <div className={`flex items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500 font-sans ${isMe ? 'justify-end' : ''}`}>
+                        <span className="font-semibold text-zinc-700 dark:text-zinc-200 dark:text-zinc-300">{msg.userName}</span>
                         <span className="font-mono flex items-center gap-0.5"><Clock className="w-3 h-3" /> {formattedTime}</span>
                       </div>
                       
                       <div className={`p-3 rounded-2xl text-xs font-sans whitespace-pre-wrap ${
                         isMe 
                           ? 'bg-indigo-600 text-white rounded-tr-none' 
-                          : 'bg-zinc-100 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-250 rounded-tl-none border border-zinc-150 dark:border-zinc-800'
+                          : 'bg-zinc-100 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-250 rounded-tl-none border border-zinc-150 dark:border-zinc-800'
                       }`}>
                         {msg.text}
                       </div>
@@ -299,7 +299,7 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               placeholder="დაწერეთ შეტყობინება..."
-              className="flex-1 px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
+              className="flex-1 px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
             />
             <button
               type="submit"
@@ -315,17 +315,17 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
       {activeTab === 'tests' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-200 font-sans">გაზიარებული ტესტები</h3>
-            <span className="text-xs text-zinc-450 font-sans font-semibold">სულ გაზიარებული: {sharedTests.length}</span>
+            <h3 className="text-base font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans">გაზიარებული ტესტები</h3>
+            <span className="text-xs text-zinc-450 dark:text-zinc-400 dark:text-zinc-500 font-sans font-semibold">სულ გაზიარებული: {sharedTests.length}</span>
           </div>
 
           {sharedTests.length === 0 ? (
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
-              <BookOpen className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
-              <p className="text-zinc-500 text-xs font-sans max-w-sm mb-2">
+              <BookOpen className="w-12 h-12 text-zinc-300 dark:text-zinc-700 dark:text-zinc-200 mb-4" />
+              <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm mb-2">
                 ამ ჯგუფში ჯერ არ არის ტესტები გაზიარებული.
               </p>
-              <p className="text-[10px] text-zinc-400 font-sans">
+              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">
                 გადადით "ჩემი ატვირთულები" გვერდზე და დააჭირეთ „გაზიარების“ ღილაკს ამ ჯგუფის ასარჩევად.
               </p>
             </div>
@@ -340,10 +340,10 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                     className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-xs flex flex-col justify-between"
                   >
                     <div>
-                      <h4 className="font-semibold text-zinc-800 dark:text-zinc-200 font-sans text-xs leading-tight line-clamp-2">
+                      <h4 className="font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans text-xs leading-tight line-clamp-2">
                         {test.title}
                       </h4>
-                      <div className="mt-2 text-[10px] text-zinc-450 dark:text-zinc-500 font-sans flex justify-between">
+                      <div className="mt-2 text-[10px] text-zinc-450 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans flex justify-between">
                         <span>ავტორი: <strong>{test.creatorName || 'ჯგუფის წევრი'}</strong></span>
                         <span>{test.questionCount} კითხვა</span>
                       </div>
@@ -379,10 +379,10 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
       {activeTab === 'members' && (
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-xs space-y-4">
           <div className="flex items-center justify-between font-sans text-sm font-semibold border-b border-zinc-150 dark:border-zinc-800 pb-3">
-            <h3 className="text-zinc-800 dark:text-zinc-150 flex items-center gap-1.5">
+            <h3 className="text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 flex items-center gap-1.5">
               <Users className="w-4 h-4 text-indigo-500" /> ჯგუფის შემადგენლობა
             </h3>
-            <span className="text-zinc-500 font-mono">წევრები: {members.length}</span>
+            <span className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-mono">წევრები: {members.length}</span>
           </div>
 
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
@@ -398,8 +398,8 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                     <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white dark:border-zinc-900" />
                   </div>
                   <div>
-                    <span className="block font-semibold text-zinc-800 dark:text-zinc-200 font-sans">{member.displayName}</span>
-                    <span className="block text-[10px] text-zinc-400 font-sans">{member.email}</span>
+                    <span className="block font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans">{member.displayName}</span>
+                    <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">{member.email}</span>
                   </div>
                 </div>
 

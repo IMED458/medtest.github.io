@@ -144,7 +144,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს ატვირთული ტესტების ჩატვირთვა...</p>
+        <p className="text-zinc-600 dark:text-zinc-300 dark:text-zinc-400 dark:text-zinc-500 font-sans text-sm animate-pulse">მიმდინარეობს ატვირთული ტესტების ჩატვირთვა...</p>
       </div>
     );
   }
@@ -155,7 +155,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
         <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 font-sans tracking-tight">
           ჩემი ატვირთული ტესტები
         </h2>
-        <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-full text-xs font-semibold font-sans text-zinc-500">
+        <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-full text-xs font-semibold font-sans text-zinc-500 dark:text-zinc-400 dark:text-zinc-500">
           ჯამში: {tests.length}
         </span>
       </div>
@@ -164,7 +164,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
           <ClipboardList className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
           <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">ჯერ არ გაქვთ ატვირთული ტესტები</h3>
-          <p className="text-zinc-500 text-xs font-sans max-w-sm">
+          <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm">
             გადადით "ატვირთვის" გვერდზე და ატვირთეთ თქვენი პირველი TXT ან PDF ფაილი შესასწავლად.
           </p>
         </div>
@@ -182,7 +182,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
               >
                 <div>
                   <div className="flex justify-between items-start gap-2 mb-2">
-                    <h3 className="font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-tight line-clamp-2">
+                    <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans leading-tight line-clamp-2">
                       {test.title}
                     </h3>
                     {test.errorCount > 0 && (
@@ -193,7 +193,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-zinc-400 dark:text-zinc-500 font-sans mb-4 mt-2">
+                  <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mb-4 mt-2">
                     <span className="flex items-center gap-1.5 font-mono">
                       <Calendar className="w-3.5 h-3.5" />
                       {new Date(test.createdAt).toLocaleDateString('ka-GE')}
@@ -206,7 +206,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
 
                   {hasStarted && (
                     <div className="mb-4">
-                      <div className="flex justify-between text-xs font-sans text-zinc-400 mb-1">
+                      <div className="flex justify-between text-xs font-sans text-zinc-400 dark:text-zinc-500 mb-1">
                         <span>პროგრესი: {progressPct}%</span>
                         <span className="font-mono">კითხვა {progress.currentQuestionIndex + 1}/{test.questionCount}</span>
                       </div>
@@ -232,7 +232,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
                       </button>
                       <button 
                         onClick={() => { playClickSound(); onStartTest(test.id, false); }}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 font-semibold text-zinc-700 dark:text-zinc-300 rounded-xl transition"
+                        className="flex items-center justify-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 font-semibold text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 rounded-xl transition"
                         title="თავიდან დაწყება"
                       >
                         <RotateCcw className="w-4 h-4" />
@@ -250,7 +250,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
 
                   <button 
                     onClick={() => { playClickSound(); setShareModalConfig({ testId: test.id, title: test.title }); }}
-                    className="flex items-center justify-center px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-zinc-700 dark:text-zinc-300 rounded-xl transition"
+                    className="flex items-center justify-center px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 rounded-xl transition"
                     title="გაზიარება"
                   >
                     <Share2 className="w-4 h-4" />
@@ -282,18 +282,18 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
       {shareModalConfig && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-md w-full shadow-lg space-y-4 animate-in fade-in-50 duration-200">
-            <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-150 font-sans flex items-center gap-2">
+            <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans flex items-center gap-2">
               <Share2 className="w-5 h-5 text-indigo-500" />
               ტესტის ჯგუფში გაზიარება
             </h3>
-            <p className="text-xs text-zinc-500 font-sans">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans">
               აირჩიეთ სასწავლო ჯგუფი, რომელშიც გსურთ გააზიაროთ ტესტი: <strong>"{shareModalConfig.title}"</strong>. ჯგუფის ყველა წევრს ექნება წვდომა ამ ტესტზე საკუთარი პროგრესით.
             </p>
 
             <select
               value={selectedGroupToShare}
               onChange={(e) => setSelectedGroupToShare(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans text-xs focus:ring-1 focus:ring-indigo-500"
+              className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans text-xs focus:ring-1 focus:ring-indigo-500"
             >
               <option value="">-- აირჩიეთ ჯგუფი --</option>
               {groups.map((group) => (
@@ -304,7 +304,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
             <div className="flex justify-end gap-2 text-xs">
               <button 
                 onClick={() => { playClickSound(); setShareModalConfig(null); }}
-                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350 rounded-xl font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
+                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 dark:text-zinc-350 dark:text-zinc-500 rounded-xl font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
               >
                 გაუქმება
               </button>
@@ -324,7 +324,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
       {editModalConfig && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-xs p-4">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-lg space-y-4 animate-in fade-in-50 duration-200">
-            <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-150 font-sans flex items-center gap-2">
+            <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans flex items-center gap-2">
               <Edit3 className="w-5 h-5 text-indigo-500" />
               სათაურის რედაქტირება
             </h3>
@@ -333,14 +333,14 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
               type="text"
               value={editedTitle}
               onChange={(e) => setEditedTitle(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans text-xs focus:ring-1 focus:ring-indigo-500"
+              className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-55 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans text-xs focus:ring-1 focus:ring-indigo-500"
               placeholder="შეიყვანეთ ახალი სათაური"
             />
 
             <div className="flex justify-end gap-2 text-xs">
               <button 
                 onClick={() => { playClickSound(); setEditModalConfig(null); }}
-                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350 rounded-xl font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
+                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 dark:text-zinc-350 dark:text-zinc-500 rounded-xl font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
               >
                 გაუქმება
               </button>

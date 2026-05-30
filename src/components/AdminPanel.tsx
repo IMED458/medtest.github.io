@@ -82,8 +82,8 @@ export const AdminPanel: React.FC = () => {
     return (
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 max-w-lg mx-auto text-center space-y-4 font-sans">
         <ShieldAlert className="w-12 h-12 text-rose-500 mx-auto" />
-        <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-150">წვდომა შეზღუდულია</h2>
-        <p className="text-zinc-500 text-xs leading-relaxed">
+        <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150">წვდომა შეზღუდულია</h2>
+        <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs leading-relaxed">
           ეს გვერდი განკუთვნილია მხოლოდ სისტემის ადმინისტრატორებისთვის.
         </p>
       </div>
@@ -94,7 +94,7 @@ export const AdminPanel: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
-        <p className="text-zinc-600 dark:text-zinc-400 font-sans text-sm">მიმდინარეობს სისტემის მონაცემების ჩატვირთვა...</p>
+        <p className="text-zinc-600 dark:text-zinc-300 dark:text-zinc-400 dark:text-zinc-500 font-sans text-sm">მიმდინარეობს სისტემის მონაცემების ჩატვირთვა...</p>
       </div>
     );
   }
@@ -106,17 +106,17 @@ export const AdminPanel: React.FC = () => {
           <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 font-sans tracking-tight">
             Dev & Admin Panel / მართვის პანელი
           </h2>
-          <p className="text-xs text-zinc-500 font-sans">სისტემის ცენტრალიზებული მონიტორინგი და ტექნიკური ლოგები</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans">სისტემის ცენტრალიზებული მონიტორინგი და ტექნიკური ლოგები</p>
         </div>
 
       </div>
 
       {/* Grid of system diagnostics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-zinc-800 dark:text-zinc-200">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200">
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Users className="w-5 h-5 text-indigo-500" />
           <div className="font-sans">
-            <span className="block text-[10px] text-zinc-400 uppercase font-bold">მომხმარებლები</span>
+            <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 uppercase font-bold">მომხმარებლები</span>
             <span className="text-lg font-bold font-mono">{usersCount}</span>
           </div>
         </div>
@@ -124,7 +124,7 @@ export const AdminPanel: React.FC = () => {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Layers className="w-5 h-5 text-emerald-500" />
           <div className="font-sans">
-            <span className="block text-[10px] text-zinc-400 uppercase font-bold">ჯგუფები</span>
+            <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 uppercase font-bold">ჯგუფები</span>
             <span className="text-lg font-bold font-mono">{groups.length}</span>
           </div>
         </div>
@@ -132,7 +132,7 @@ export const AdminPanel: React.FC = () => {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <FileText className="w-5 h-5 text-amber-500" />
           <div className="font-sans">
-            <span className="block text-[10px] text-zinc-400 uppercase font-bold">ტესტები</span>
+            <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 uppercase font-bold">ტესტები</span>
             <span className="text-lg font-bold font-mono">{tests.length}</span>
           </div>
         </div>
@@ -140,8 +140,8 @@ export const AdminPanel: React.FC = () => {
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 flex items-center gap-3">
           <Database className="w-5 h-5 text-rose-550" />
           <div className="font-sans">
-            <span className="block text-[10px] text-zinc-400 uppercase font-bold">Storage Usage</span>
-            <span className="text-lg font-bold font-mono">1.28 MB <span className="text-[10px] text-zinc-400 font-normal">/ 5 GB</span></span>
+            <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 uppercase font-bold">Storage Usage</span>
+            <span className="text-lg font-bold font-mono">1.28 MB <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-normal">/ 5 GB</span></span>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@ export const AdminPanel: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* PDF Processor Activity Log */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-xs font-sans font-sans">
-          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
+          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-100 dark:text-zinc-150">
             <FileCheck className="w-4 h-4 text-emerald-500" /> ფაილების დამუშავების ისტორია
           </h3>
 
@@ -164,7 +164,7 @@ export const AdminPanel: React.FC = () => {
                     {log.status === 'success' ? 'გავლა' : 'გაფრთხილება'}
                   </span>
                 </div>
-                <div className="text-[10px] text-zinc-400 flex justify-between font-mono">
+                <div className="text-[10px] text-zinc-400 dark:text-zinc-500 flex justify-between font-mono">
                   <span>კითხვა: {log.questions} • შეცდომა: {log.errors}</span>
                   <span>დრო: {log.time}</span>
                 </div>
@@ -175,7 +175,7 @@ export const AdminPanel: React.FC = () => {
 
         {/* Audit Logs */}
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-xs font-sans">
-          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-150">
+          <h3 className="text-sm font-semibold mb-4 border-b border-zinc-100 dark:border-zinc-800 pb-3 flex items-center gap-1.5 text-zinc-800 dark:text-zinc-100 dark:text-zinc-150">
             <Terminal className="w-4 h-4 text-indigo-500 animate-pulse" /> Console Audit Logs
           </h3>
 
@@ -183,10 +183,10 @@ export const AdminPanel: React.FC = () => {
             {auditLogs.map((log) => (
               <div key={log.id} className="p-2 bg-zinc-50 dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-800 rounded-lg flex justify-between items-start gap-3">
                 <div className="space-y-0.5 min-w-0">
-                  <span className="text-zinc-400">[{log.source}]</span>
-                  <p className="text-zinc-700 dark:text-zinc-300 truncate">{log.action}</p>
+                  <span className="text-zinc-400 dark:text-zinc-500">[{log.source}]</span>
+                  <p className="text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 truncate">{log.action}</p>
                 </div>
-                <div className="shrink-0 text-zinc-400 whitespace-nowrap">{log.timestamp}</div>
+                <div className="shrink-0 text-zinc-400 dark:text-zinc-500 whitespace-nowrap">{log.timestamp}</div>
               </div>
             ))}
           </div>

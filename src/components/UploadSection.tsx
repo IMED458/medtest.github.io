@@ -163,18 +163,18 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
             className="hidden"
             accept=".txt,.pdf"
           />
-          <UploadCloud className="w-12 h-12 text-zinc-400 mb-4" />
-          <p className="text-zinc-700 dark:text-zinc-300 font-medium mb-1 text-center font-sans text-sm">
+          <UploadCloud className="w-12 h-12 text-zinc-400 dark:text-zinc-500 mb-4" />
+          <p className="text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 font-medium mb-1 text-center font-sans text-sm">
             გადმოათრიეთ ფაილი აქ ან დააკლიკეთ ასარჩევად
           </p>
-          <p className="text-zinc-400 text-xs text-center font-sans mt-1">
+          <p className="text-zinc-400 dark:text-zinc-500 text-xs text-center font-sans mt-1">
             მხარდაჭერილია ფორმატები: TXT და PDF
           </p>
         </div>
 
         {loading && (
           <div className="mt-6 space-y-2">
-            <div className="flex justify-between text-xs text-zinc-500 font-mono">
+            <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-mono">
               <span className="truncate">{statusText}</span>
               <span>{uploadProgress}%</span>
             </div>
@@ -197,8 +197,8 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-zinc-50 dark:bg-zinc-950 rounded-xl border border-zinc-150 dark:border-zinc-800 text-center">
-              <div className="text-sm text-zinc-400 font-sans">სულ კითხვები</div>
-              <div className="text-2xl font-bold font-mono text-zinc-800 dark:text-zinc-150">{report.totalQuestions}</div>
+              <div className="text-sm text-zinc-400 dark:text-zinc-500 font-sans">სულ კითხვები</div>
+              <div className="text-2xl font-bold font-mono text-zinc-800 dark:text-zinc-100 dark:text-zinc-150">{report.totalQuestions}</div>
             </div>
             <div className="p-4 bg-emerald-50/55 dark:bg-emerald-950/25 rounded-xl border border-emerald-100 dark:border-emerald-955 text-center">
               <div className="text-sm text-emerald-600 dark:text-emerald-400 font-sans">სწორი კითხვები</div>
@@ -212,7 +212,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
 
           {report.issues.length > 0 && (
             <div className="space-y-3">
-              <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 font-sans flex items-center space-x-1">
+              <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 font-sans flex items-center space-x-1">
                 <AlertTriangle className="w-4 h-4 text-amber-500" />
                 <span>აღმოჩენილი სინტაქსური პრობლემები:</span>
               </div>
@@ -220,7 +220,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
                 {report.issues.map((issue: any, i: number) => (
                   <div key={i} className="p-3 hover:bg-zinc-50/50 dark:hover:bg-zinc-950/50 flex flex-col space-y-1">
                     <div className="flex justify-between font-medium">
-                      <span className="text-zinc-800 dark:text-zinc-200 font-mono">კითხვა #{issue.questionNumber}</span>
+                      <span className="text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-mono">კითხვა #{issue.questionNumber}</span>
                       <span className="px-1.5 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-300 text-[10px] font-semibold">
                         {issue.issueType === 'missing_correct' && 'სწორი პასუხის გარეშე'}
                         {issue.issueType === 'multiple_correct' && 'ორმაგი სწორი პასუხი'}
@@ -232,7 +232,7 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
                       </span>
                     </div>
                     {issue.questionText && (
-                      <div className="text-zinc-400 italic truncate font-sans">"{issue.questionText}"</div>
+                      <div className="text-zinc-400 dark:text-zinc-500 italic truncate font-sans">"{issue.questionText}"</div>
                     )}
                     <div className="text-rose-600 dark:text-rose-300 font-mono">{issue.message}</div>
                   </div>
@@ -249,15 +249,15 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
           <FileDown className="w-4 h-4" />
           სტანდარტული გაიდლაინი და ფაილის სინტაქსი
         </h3>
-        <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans mb-4">
+        <p className="text-xs text-zinc-600 dark:text-zinc-300 dark:text-zinc-400 dark:text-zinc-500 leading-relaxed font-sans mb-4">
           სისტემას გააჩნია ავტომატური დამუშავების ძრავა. ტესტების სწორად აღსაქმელად ფაილში დაიცავით შემდეგი მარტივი სინტაქსი:
         </p>
-        <div className="bg-zinc-100 dark:bg-zinc-950 rounded-lg p-4 font-mono text-xs text-zinc-800 dark:text-zinc-300 space-y-1.5">
+        <div className="bg-zinc-100 dark:bg-zinc-950 rounded-lg p-4 font-mono text-xs text-zinc-800 dark:text-zinc-100 dark:text-zinc-300 space-y-1.5">
           <p className="text-indigo-600 dark:text-indigo-400">//// რომელია საქართველოს დედაქალაქი?</p>
-          <p className="text-zinc-400">/// ქუთაისი</p>
+          <p className="text-zinc-400 dark:text-zinc-500">/// ქუთაისი</p>
           <p className="text-emerald-600 dark:text-emerald-400">// თბილისი</p>
-          <p className="text-zinc-400">/// ბათუმი</p>
-          <p className="text-zinc-400">/// გორი</p>
+          <p className="text-zinc-400 dark:text-zinc-500">/// ბათუმი</p>
+          <p className="text-zinc-400 dark:text-zinc-500">/// გორი</p>
         </div>
       </div>
     </div>

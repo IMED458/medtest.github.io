@@ -150,7 +150,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <Users className="w-8 h-8 text-indigo-500 animate-pulse mb-4" />
-        <p className="text-zinc-500 dark:text-zinc-400 font-sans text-sm animate-pulse">მიმდინარეობს თქვენი ჯგუფების ჩატვირთვა...</p>
+        <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans text-sm animate-pulse">მიმდინარეობს თქვენი ჯგუფების ჩატვირთვა...</p>
       </div>
     );
   }
@@ -160,7 +160,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
       <div className="flex flex-col items-center justify-center py-20 text-center px-4">
         <Users className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
         <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-2">ჯგუფები მხოლოდ Google-ით შესვლისთვის</h3>
-        <p className="text-zinc-500 text-xs font-sans max-w-sm">სასწავლო ჯგუფების შესაქმნელად და ტესტების გასაზიარებლად გთხოვთ გაიაროთ ავტორიზაცია Google-ის ანგარიშით.</p>
+        <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm">სასწავლო ჯგუფების შესაქმნელად და ტესტების გასაზიარებლად გთხოვთ გაიაროთ ავტორიზაცია Google-ის ანგარიშით.</p>
       </div>
     );
   }
@@ -172,13 +172,13 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
           <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 font-sans tracking-tight">
             სასწავლო ჯგუფები
           </h2>
-          <p className="text-xs text-zinc-500 font-sans mt-0.5">შექმენით ჯგუფები, გააზიარეთ ტესტები და იმეცადინეთ ერთად</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mt-0.5">შექმენით ჯგუფები, გააზიარეთ ტესტები და იმეცადინეთ ერთად</p>
         </div>
 
         <div className="flex gap-2 shrink-0">
           <button
             onClick={() => { playClickSound(); setShowJoin(true); setShowCreate(false); }}
-            className="flex items-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-xs font-semibold rounded-xl text-zinc-700 dark:text-zinc-300 transition"
+            className="flex items-center gap-1.5 px-3 py-2 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-950 text-xs font-semibold rounded-xl text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 transition"
           >
             <Key className="w-4 h-4 text-indigo-500" />
             კოდით შესვლა
@@ -199,23 +199,23 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
           <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 font-sans">ახალი ჯგუფის შექმნა</h3>
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">ჯგუფის სახელი *</label>
+              <label className="block text-xs text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mb-1">ჯგუფის სახელი *</label>
               <input
                 type="text"
                 required
                 value={grpName}
                 onChange={(e) => setGrpName(e.target.value)}
                 placeholder="მაგ: სამედიცინო ფაკულტეტი"
-                className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
               />
             </div>
             <div>
-              <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">აღწერა</label>
+              <label className="block text-xs text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mb-1">აღწერა</label>
               <textarea
                 value={grpDesc}
                 onChange={(e) => setGrpDesc(e.target.value)}
                 placeholder="ჯგუფის მოკლე აღწერა..."
-                className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans focus:ring-1 focus:ring-indigo-500 outline-hidden"
                 rows={2}
               />
             </div>
@@ -224,7 +224,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
             <button
               type="button"
               onClick={() => { playClickSound(); setShowCreate(false); }}
-              className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-350 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
+              className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 dark:text-zinc-350 dark:text-zinc-500 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-950 transition"
             >
               გაუქმება
             </button>
@@ -243,7 +243,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
         <form onSubmit={handleJoinByCode} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 space-y-4 shadow-xs animate-in slide-in-from-top-4 duration-300">
           <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 font-sans">ჯგუფში გაწევრიანება კოდით</h3>
           <div>
-            <label className="block text-xs text-zinc-400 dark:text-zinc-400 font-sans mb-1">ჯგუფის მოწვევის კოდი *</label>
+            <label className="block text-xs text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans mb-1">ჯგუფის მოწვევის კოდი *</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -262,7 +262,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
               </button>
             </div>
           </div>
-          <p className="text-[10px] text-zinc-450 dark:text-zinc-500 font-sans">
+          <p className="text-[10px] text-zinc-450 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans">
             მიიღეთ 6 სიმბოლონიანი კოდი თქვენი მეგობრისგან ან ლექტორისგან, ვისაც უკვე შექმნილი აქვს სასწავლო სივრცე.
           </p>
         </form>
@@ -272,7 +272,7 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-10 flex flex-col items-center justify-center text-center">
           <Users className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
           <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">უჯგუფო გარემო</h3>
-          <p className="text-zinc-500 text-xs font-sans max-w-sm">
+          <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm">
             ჯერ არ ხართ გაწევრიანებული არცერთ სასწავლო ჯგუფში. შექმენით ახალი ჯგუფი ან მოითხოვეთ შესვლის კოდი.
           </p>
         </div>
@@ -289,21 +289,21 @@ export const GroupsSection: React.FC<GroupsSectionProps> = ({ onSelectGroup }) =
               >
                 <div>
                   <div className="flex justify-between items-start gap-2 mb-2">
-                    <h3 className="font-semibold text-zinc-800 dark:text-zinc-150 font-sans leading-tight">
+                    <h3 className="font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-150 font-sans leading-tight">
                       {group.name}
                     </h3>
-                    <span className="shrink-0 px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-[10px] text-zinc-500 font-mono rounded-full flex items-center gap-1 font-semibold">
+                    <span className="shrink-0 px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-[10px] text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-mono rounded-full flex items-center gap-1 font-semibold">
                       <Code className="w-3.5 h-3.5 text-indigo-500" />
                       {group.code}
                     </span>
                   </div>
 
-                  <p className="text-zinc-450 dark:text-zinc-400 text-xs font-sans line-clamp-2 mb-4 mt-2">
+                  <p className="text-zinc-450 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans line-clamp-2 mb-4 mt-2">
                     {group.description || 'აღწერის გარეშე'}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-400 dark:text-zinc-500">
+                <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-800 text-xs text-zinc-400 dark:text-zinc-500 dark:text-zinc-400 dark:text-zinc-500">
                   <div className="flex items-center gap-1 font-sans text-[11px]">
                     <Shield className="w-3.5 h-3.5 text-indigo-400" />
                     <span>ავტორი: <strong>{isOwner ? 'თქვენ' : (group.creatorName || 'მოლაპარაკე')}</strong></span>
