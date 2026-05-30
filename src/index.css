@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light dark;
-}
+/* Tailwind v4: class-based dark mode via .dark on <html> */
+@variant dark (&:where(.dark, .dark *));
 
 body {
-  @apply bg-slate-50 text-zinc-900;
+  background-color: #f8fafc;
+  color: #18181b;
 }
 
 .dark body {
-  @apply bg-zinc-950 text-white;
+  background-color: #09090b;
+  color: #ffffff;
 }
