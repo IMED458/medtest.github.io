@@ -10,8 +10,14 @@ import {
   RefreshCw, SlidersHorizontal, X, List, Search
 } from 'lucide-react';
 import { playClickSound, playCorrectSound, playIncorrectSound } from '../utils/sounds';
+import { useFirebase } from './FirebaseProvider';
+import { db } from '../firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 interface Props { onGoBack: () => void; }
+
+const RESIDENCY_TEST_ID = 'residency_nanetashvili';
+const LS_KEY = 'medtest_residency_progress';
 
 type FlatQ = ResidencyQuestion & { sectionId: string; sectionTitle: string };
 
@@ -32,8 +38,12 @@ const formatTime = (s: number) =>
   `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor((s % 3600) / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
 export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
+  const { user, isLocalUser } = useFirebase();
   const [questions, setQuestions] = useState<FlatQ[]>(ALL_FLAT);
   const originalQuestions = ALL_FLAT;
+
+  const [loading, setLoading] = useState(true);
+  const [showPrompt, setShowPrompt] = useState(false);
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [jumpInput, setJumpInput] = useState('');
@@ -65,6 +75,87 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
   const [showToc, setShowToc] = useState(false);
 
   const activeTocRef = useRef<HTMLButtonElement>(null);
+
+  // ── Progress persistence helpers ──────────────────────────────────────────
+
+  const buildPayload = (
+    idx: number, corr: number, wrg: number,
+    resps: Record<string, { chosenOptionIndex: number; isCorrect: boolean }>,
+    wrongs: string[], flags: string[], secs: number
+  ) => ({
+    testId: RESIDENCY_TEST_ID,
+    userId: user?.uid ?? '',
+    currentQuestionIndex: idx,
+    correctCount: corr,
+    wrongCount: wrg,
+    responses: resps,
+    wrongQuestions: wrongs,
+    flaggedQuestions: flags,
+    timeSpent: secs,
+    updatedAt: new Date().toISOString(),
+  });
+
+  const saveProgress = useCallback(async (
+    idx = currentIdx, corr = correctCount, wrg = wrongCount,
+    resps = responses, wrongs = historicalWrongIds, flags = flaggedIds, secs = seconds
+  ) => {
+    if (!user) return;
+    const payload = buildPayload(idx, corr, wrg, resps, wrongs, flags, secs);
+    try {
+      if (isLocalUser) {
+        localStorage.setItem(LS_KEY + '_' + user.uid, JSON.stringify(payload));
+      } else {
+        await setDoc(doc(db, 'progress', `${RESIDENCY_TEST_ID}_${user.uid}`), payload);
+      }
+    } catch (e) {
+      console.warn('residency progress save failed', e);
+    }
+  }, [user, isLocalUser, currentIdx, correctCount, wrongCount, responses, historicalWrongIds, flaggedIds, seconds]);
+
+  // ── Load progress on mount ────────────────────────────────────────────────
+  useEffect(() => {
+    const load = async () => {
+      if (!user) { setLoading(false); return; }
+      try {
+        let saved: any = null;
+        if (isLocalUser) {
+          const raw = localStorage.getItem(LS_KEY + '_' + user.uid);
+          if (raw) saved = JSON.parse(raw);
+        } else {
+          const snap = await getDoc(doc(db, 'progress', `${RESIDENCY_TEST_ID}_${user.uid}`));
+          if (snap.exists()) saved = snap.data();
+        }
+        if (saved && (saved.currentQuestionIndex > 0 || Object.keys(saved.responses || {}).length > 0)) {
+          // Restore state immediately, then ask
+          setCurrentIdx(saved.currentQuestionIndex || 0);
+          setSeconds(saved.timeSpent || 0);
+          setResponses(saved.responses || {});
+          setFlaggedIds(saved.flaggedQuestions || []);
+          setHistoricalWrongIds(saved.wrongQuestions || []);
+          setCorrectCount(saved.correctCount || 0);
+          setWrongCount(saved.wrongCount || 0);
+          setShowPrompt(true);
+        }
+      } catch (e) {
+        console.warn('residency progress load failed', e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [user]);
+
+  const handleResumeDecision = (resume: boolean) => {
+    playClickSound();
+    if (!resume) {
+      // Reset
+      setCurrentIdx(0); setSeconds(0); setResponses({});
+      setFlaggedIds([]); setHistoricalWrongIds([]); setSessionWrongIds([]);
+      setCorrectCount(0); setWrongCount(0);
+      saveProgress(0, 0, 0, {}, [], [], 0);
+    }
+    setShowPrompt(false);
+  };
 
   const getClean = (t: string) => t.toLowerCase().trim();
 
@@ -122,13 +213,21 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
 
   const handleNext = useCallback(() => {
     if (soundEnabled) playClickSound();
-    if (currentIdx < activeQuestionsPool.length - 1) setCurrentIdx(i => i + 1);
-  }, [currentIdx, activeQuestionsPool.length, soundEnabled]);
+    if (currentIdx < activeQuestionsPool.length - 1) {
+      const next = currentIdx + 1;
+      setCurrentIdx(next);
+      saveProgress(next);
+    }
+  }, [currentIdx, activeQuestionsPool.length, soundEnabled, saveProgress]);
 
   const handlePrev = useCallback(() => {
     if (soundEnabled) playClickSound();
-    if (currentIdx > 0) setCurrentIdx(i => i - 1);
-  }, [currentIdx, soundEnabled]);
+    if (currentIdx > 0) {
+      const prev = currentIdx - 1;
+      setCurrentIdx(prev);
+      saveProgress(prev);
+    }
+  }, [currentIdx, soundEnabled, saveProgress]);
 
   const handleSelectOption = (realIdx: number) => {
     if (checked) return;
@@ -163,13 +262,16 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
     setCorrectCount(nc); setWrongCount(nw);
     setSessionWrongIds(nSW); setHistoricalWrongIds(nHW);
     setChecked(true);
+    saveProgress(currentIdx, nc, nw, nextResponses, nHW, flaggedIds, seconds);
     if (autoAdvance) setTimeout(() => handleNext(), 800);
   };
 
   const toggleFlag = () => {
     if (!currentQ) return;
     const key = String(currentQ.globalIndex);
-    setFlaggedIds(prev => prev.includes(key) ? prev.filter(id => id !== key) : [...prev, key]);
+    const nextFlags = flaggedIds.includes(key) ? flaggedIds.filter(id => id !== key) : [...flaggedIds, key];
+    setFlaggedIds(nextFlags);
+    saveProgress(currentIdx, correctCount, wrongCount, responses, historicalWrongIds, nextFlags, seconds);
     playClickSound();
   };
 
@@ -212,6 +314,7 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
     setSearchCorrect(''); setSearchIncorrect('');
     setQuestions([...originalQuestions]);
     setShowTools(false);
+    saveProgress(0, 0, 0, {}, [], [], 0);
   };
   const jumpToSection = (sec: ResidencySection) => {
     playClickSound();
@@ -228,6 +331,17 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
   const correctDisplayIdx = currentQ
     ? (shuffledOptionsMapping ? shuffledOptionsMapping.indexOf(currentQ.correctIndex) : currentQ.correctIndex)
     : 0;
+
+  if (loading && !showPrompt) {
+    return (
+      <div className="fixed inset-0 z-40 bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <RefreshCw className="w-8 h-8 text-indigo-500 animate-spin" />
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 font-sans">პროგრესი იტვირთება...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (activeQuestionsPool.length === 0) {
     return (
@@ -249,6 +363,32 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
 
   return (
     <div className="fixed inset-0 z-40 bg-zinc-50 dark:bg-zinc-950 p-2.5 sm:p-4 md:p-5 flex flex-col h-[100dvh] overflow-hidden font-sans">
+
+      {/* Resume dialog */}
+      {showPrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-sm p-4">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-sm w-full shadow-lg space-y-4 font-sans animate-in zoom-in-95 duration-200">
+            <h3 className="text-base font-bold text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
+              <Clock className="w-5 h-5 text-indigo-500" />
+              გსურთ გაგრძელება?
+            </h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              ნაპოვნია შენახული პროგრესი — კითხვა #{currentIdx + 1}, {correctCount} სწორი, {wrongCount} შეცდომა.
+              გსურთ გაგრძელოთ თუ თავიდან დაიწყოთ?
+            </p>
+            <div className="flex gap-2 text-xs font-bold pt-2 justify-end">
+              <button onClick={() => handleResumeDecision(false)}
+                className="px-4 py-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-950 transition cursor-pointer">
+                თავიდან დაწყება
+              </button>
+              <button onClick={() => handleResumeDecision(true)}
+                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition cursor-pointer">
+                გაგრძელება
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── Header ── */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-2.5 sm:p-3 shadow-xs flex items-center justify-between gap-3 shrink-0">
