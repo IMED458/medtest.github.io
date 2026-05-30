@@ -30,7 +30,6 @@ export const AdminPanel: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [tests, setTests] = useState<TestMetadata[]>([]);
   const [loading, setLoading] = useState(true);
-  const [simulateAdmin, setSimulateAdmin] = useState(true); // default true to allow simple testing
 
   useEffect(() => {
     // 1. Fetch user counts
@@ -79,7 +78,7 @@ export const AdminPanel: React.FC = () => {
     { id: 'p_3', filename: 'სასამართლო_მედიცინა.pdf', pages: 42, questions: 300, errors: 12, status: 'warning', time: '15:12' }
   ];
 
-  if (!isAdmin && !simulateAdmin) {
+  if (!isAdmin) {
     return (
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-805 rounded-2xl p-8 max-w-lg mx-auto text-center space-y-4 font-sans">
         <ShieldAlert className="w-12 h-12 text-rose-500 mx-auto" />
@@ -87,12 +86,6 @@ export const AdminPanel: React.FC = () => {
         <p className="text-zinc-500 text-xs leading-relaxed">
           ეს გვერდი განკუთვნილია მხოლოდ სისტემის ადმინისტრატორებისთვის.
         </p>
-        <button
-          onClick={() => setSimulateAdmin(true)}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold whitespace-nowrap transition"
-        >
-          ადმინისტრატორის უფლების სიმულაცია
-        </button>
       </div>
     );
   }
@@ -116,18 +109,6 @@ export const AdminPanel: React.FC = () => {
           <p className="text-xs text-zinc-500 font-sans">სისტემის ცენტრალიზებული მონიტორინგი და ტექნიკური ლოგები</p>
         </div>
 
-        {/* Admin simulate switch */}
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] text-zinc-400 font-sans uppercase font-bold tracking-wider">ადმინ რეჟიმი (სიმულაცია)</span>
-          <button
-            onClick={() => setSimulateAdmin(!simulateAdmin)}
-            className={`px-3 py-1 rounded-full text-[10px] font-bold transition font-sans ${
-              simulateAdmin ? 'bg-indigo-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
-            }`}
-          >
-            {simulateAdmin ? 'ჩართულია' : 'გამორთულია'}
-          </button>
-        </div>
       </div>
 
       {/* Grid of system diagnostics */}

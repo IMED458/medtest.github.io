@@ -231,18 +231,20 @@ const AppContent: React.FC = () => {
               📊 სტატისტიკა
             </button>
 
-            {/* Admin toggle panel list */}
-            <button
-              onClick={() => { playClickSound(); setActiveSection('admin'); setSelectedGroupId(null); }}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
-                activeSection === 'admin' 
-                  ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400' 
-                  : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
-              }`}
-            >
-              <ShieldAlert className="w-4 h-4" />
-              ⚙️ მართვის პანელი
-            </button>
+            {/* Admin panel — only visible to admin users */}
+            {isAdmin && (
+              <button
+                onClick={() => { playClickSound(); setActiveSection('admin'); setSelectedGroupId(null); }}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl transition cursor-pointer ${
+                  activeSection === 'admin'
+                    ? 'bg-indigo-50 text-indigo-650 dark:bg-zinc-950 dark:text-indigo-400'
+                    : 'text-zinc-700 hover:bg-zinc-50 dark:text-zinc-350 dark:hover:bg-zinc-950'
+                }`}
+              >
+                <ShieldAlert className="w-4 h-4" />
+                ⚙️ მართვის პანელი
+              </button>
+            )}
           </nav>
         </div>
 
@@ -307,7 +309,7 @@ const AppContent: React.FC = () => {
           ) : (
             <>
               {activeSection === 'library' && <TestLibrarySection onStartTest={handleStartPracticeTest} />}
-              {activeSection === 'upload' && <UploadSection onFinished={() => setActiveSection('my-uploads')} />}
+              {activeSection === 'upload' && <UploadSection onUploadSuccess={() => setActiveSection('my-uploads')} />}
               {activeSection === 'my-uploads' && <MyTestsSection onStartTest={handleStartPracticeTest} />}
               {activeSection === 'groups' && <GroupsSection onSelectGroup={(gid) => setSelectedGroupId(gid)} />}
               {activeSection === 'auscultations' && <AuscultationSection />}
