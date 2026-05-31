@@ -279,6 +279,8 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
               messages.map((msg) => {
                 const isMe = msg.userId === user?.uid;
                 const formattedTime = new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const senderMember = members.find(m => m.userId === msg.userId);
+                const displayName = senderMember?.nickname || msg.userName;
 
                 return (
                   <div key={msg.id} className={`flex gap-3 max-w-[85%] ${isMe ? 'ml-auto flex-row-reverse' : ''}`}>
@@ -291,7 +293,9 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
                     
                     <div className="space-y-1">
                       <div className={`flex items-center gap-1.5 text-[10px] text-zinc-400 dark:text-zinc-500 font-sans ${isMe ? 'justify-end' : ''}`}>
-                        <span className="font-semibold text-zinc-700 dark:text-zinc-200 dark:text-zinc-300">{msg.userName}</span>
+                        <span className={`font-semibold font-sans ${senderMember?.nickname ? 'text-indigo-600 dark:text-indigo-400' : 'text-zinc-700 dark:text-zinc-200'}`}>
+                          {displayName}
+                        </span>
                         <span className="font-mono flex items-center gap-0.5"><Clock className="w-3 h-3" /> {formattedTime}</span>
                       </div>
                       
