@@ -419,7 +419,7 @@ export const ResidencyTestPage: React.FC<Props> = ({ onGoBack }) => {
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="min-w-0">
-            <span className="block text-[9px] text-zinc-400 dark:text-zinc-500 uppercase font-bold tracking-wider">G. Nanetashvili • {currentQ?.sectionTitle}</span>
+            <span className="block text-[9px] text-zinc-400 dark:text-zinc-500 uppercase font-bold tracking-wider">{currentQ?.sectionTitle}</span>
             <h2 className="text-sm font-bold text-zinc-800 dark:text-zinc-100 leading-tight truncate max-w-[140px] sm:max-w-[280px] md:max-w-none">
               რეზიდენტურის ტესტები
             </h2>

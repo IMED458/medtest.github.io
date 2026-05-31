@@ -91,7 +91,7 @@ const AppContent: React.FC = () => {
           </div>
 
           <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 font-sans leading-relaxed">
-            იმეცადინეთ დამოუკიდებლად, ატვირთეთ თქვენი კონსპექტები / ტესტები TXT და PDF ფორმატში და გააზიარეთ სასწავლო ჯგუფებში.
+            იმეცადინეთ დამოუკიდებლად, ატვირთეთ თქვენი კონსპექტები / ტესტები TXT ფორმატში და გააზიარეთ სასწავლო ჯგუფებში.
           </p>
 
           <div className="space-y-3">
@@ -122,7 +122,7 @@ const AppContent: React.FC = () => {
 
         {/* Footer */}
         <div className="text-center text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">
-          © {new Date().getFullYear()} სამედიცინო & აკადემიური მომზადების ცენტრი • ყველა უფლება დაცულია
+          © 2026 • By DR.IMED🩺 • ყველა უფლება დაცულია
         </div>
       </div>
     );

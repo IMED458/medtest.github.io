@@ -66,16 +66,16 @@ export const AdminPanel: React.FC = () => {
   // System Logs mock (to maintain a highly detailed and live telemetry feed in Admin view)
   const auditLogs: SystemLog[] = [
     { id: '1', source: 'Auth Engine', action: 'Google Secure Authentication token processed', status: 'success', timestamp: '16:14:25' },
-    { id: '2', source: 'PDF Extractor', action: 'Global Worker initialized from CDN successfully', status: 'success', timestamp: '16:14:32' },
+    { id: '2', source: 'TXT Parser', action: 'Question parser engine initialized successfully', status: 'success', timestamp: '16:14:32' },
     { id: '3', source: 'Database Sync', action: 'Users profile lookup transaction committed', status: 'success', timestamp: '16:15:20' },
     { id: '4', source: 'Firestore Rules', action: 'Zero-Trust secure ABAC constraints deployed', status: 'success', timestamp: '16:17:10' },
     { id: '5', source: 'Validation Engine', action: 'Semantic processing constraints loaded for Georgian TXT compiler', status: 'info', timestamp: '16:18:04' },
   ];
 
   const parserLogs = [
-    { id: 'p_1', filename: 'კარდიოლოგია_ფინალური.pdf', pages: 18, questions: 140, errors: 3, status: 'warning', time: '12:05' },
+    { id: 'p_1', filename: 'კარდიოლოგია_ფინალური.txt', pages: 1, questions: 140, errors: 3, status: 'warning', time: '12:05' },
     { id: 'p_2', filename: 'Pathology_Midterm.txt', pages: 1, questions: 50, errors: 0, status: 'success', time: '14:30' },
-    { id: 'p_3', filename: 'სასამართლო_მედიცინა.pdf', pages: 42, questions: 300, errors: 12, status: 'warning', time: '15:12' }
+    { id: 'p_3', filename: 'სასამართლო_მედიცინა.txt', pages: 1, questions: 300, errors: 12, status: 'warning', time: '15:12' }
   ];
 
   if (!isAdmin) {

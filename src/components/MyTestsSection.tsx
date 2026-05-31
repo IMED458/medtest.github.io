@@ -165,7 +165,7 @@ export const MyTestsSection: React.FC<MyTestsSectionProps> = ({ onStartTest }) =
           <ClipboardList className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-4" />
           <h3 className="font-semibold text-zinc-700 dark:text-zinc-200 font-sans mb-1">ჯერ არ გაქვთ ატვირთული ტესტები</h3>
           <p className="text-zinc-500 dark:text-zinc-400 dark:text-zinc-500 text-xs font-sans max-w-sm">
-            გადადით "ატვირთვის" გვერდზე და ატვირთეთ თქვენი პირველი TXT ან PDF ფაილი შესასწავლად.
+            გადადით "ატვირთვის" გვერდზე და ატვირთეთ თქვენი პირველი TXT ფაილი შესასწავლად.
           </p>
         </div>
       ) : (
