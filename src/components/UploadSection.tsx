@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { useFirebase } from './FirebaseProvider';
-import { parseTextToQuestions, extractTextFromPDF } from '../utils/parser';
+import { parseTextToQuestions } from '../utils/parser';
 import { localSaveTest, localSaveQuestions } from '../utils/localStore';
 import { TestMetadata, Question } from '../types';
 import { UploadCloud, FileText, FileDown, CheckCircle, AlertTriangle, Loader2 } from 'lucide-react';
@@ -52,11 +52,8 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
       return;
     }
 
-    const isPdf = file.name.endsWith('.pdf');
-    const isTxt = file.name.endsWith('.txt');
-
-    if (!isPdf && !isTxt) {
-      alert('მხოლოდ TXT ან PDF ფაილებია მხარდაჭერილი');
+    if (!file.name.endsWith('.txt')) {
+      alert('მხოლოდ TXT ფაილებია მხარდაჭერილი');
       playIncorrectSound();
       return;
     }
@@ -67,16 +64,8 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
     playClickSound();
 
     try {
-      let rawText = '';
-      if (isPdf) {
-        rawText = await extractTextFromPDF(file, (pct) => {
-          setUploadProgress(10 + Math.floor(pct * 0.4)); // PDF extraction maps to 10%-50%
-          setStatusText(`PDF დამუშავება: ${pct}%`);
-        });
-      } else {
-        rawText = await file.text();
-        setUploadProgress(50);
-      }
+      const rawText = await file.text();
+      setUploadProgress(50);
 
       setStatusText('მიმდინარეობს სინტაქსის ვალიდაცია...');
       const { questions, report: validationReport } = parseTextToQuestions(rawText);
@@ -161,14 +150,14 @@ export const UploadSection: React.FC<UploadSectionProps> = ({ onUploadSuccess })
             ref={fileInputRef}
             onChange={handleFileSelect}
             className="hidden"
-            accept=".txt,.pdf"
+            accept=".txt"
           />
           <UploadCloud className="w-12 h-12 text-zinc-400 dark:text-zinc-500 mb-4" />
           <p className="text-zinc-700 dark:text-zinc-200 dark:text-zinc-300 font-medium mb-1 text-center font-sans text-sm">
             გადმოათრიეთ ფაილი აქ ან დააკლიკეთ ასარჩევად
           </p>
           <p className="text-zinc-400 dark:text-zinc-500 text-xs text-center font-sans mt-1">
-            მხარდაჭერილია ფორმატები: TXT და PDF
+            მხარდაჭერილია ფორმატი: TXT
           </p>
         </div>
 
