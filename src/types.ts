@@ -78,6 +78,7 @@ export interface GroupMember {
   displayName: string;
   joinedAt: string; // ISO String
   role: 'owner' | 'admin' | 'member';
+  nickname?: string; // Optional group-specific nickname
 }
 
 export interface GroupTest {

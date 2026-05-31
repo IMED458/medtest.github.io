@@ -26,7 +26,9 @@ import {
   Plus, 
   RefreshCw,
   Play,
-  Heart
+  Heart,
+  Pencil,
+  X as XIcon
 } from 'lucide-react';
 import { playClickSound, playCorrectSound, playIncorrectSound } from '../utils/sounds';
 
@@ -42,6 +44,8 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
   const [members, setMembers] = useState<GroupMember[]>([]);
   const [sharedTests, setSharedTests] = useState<TestMetadata[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [editingNickname, setEditingNickname] = useState<string | null>(null); // userId being edited
+  const [nicknameInput, setNicknameInput] = useState('');
   const [activeTab, setActiveTab] = useState<'chat' | 'tests' | 'members'>('chat');
   const [copied, setCopied] = useState(false);
 
@@ -135,6 +139,20 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
     setCopied(true);
     playCorrectSound();
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSaveNickname = async (targetUserId: string) => {
+    playClickSound();
+    try {
+      const memberRef = doc(db, 'groups', groupId, 'members', targetUserId);
+      const nick = nicknameInput.trim();
+      await setDoc(memberRef, { nickname: nick || null }, { merge: true });
+      setEditingNickname(null);
+      setNicknameInput('');
+      playCorrectSound();
+    } catch (err) {
+      console.error('nickname save failed', err);
+    }
   };
 
   const handleUnshareTest = async (testId: string) => {
@@ -387,31 +405,88 @@ export const GroupDetailView: React.FC<GroupDetailViewProps> = ({ groupId, onGoB
 
           <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {members.map((member) => (
-              <div key={member.userId} className="py-3 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2.5">
-                  <div className="relative">
-                    <img
-                      src={`https://api.dicebear.com/7.x/bottts/svg?seed=${member.userId}`}
-                      alt={member.displayName}
-                      className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-950"
-                    />
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white dark:border-zinc-900" />
+              <div key={member.userId} className="py-3 flex flex-col gap-2 text-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative shrink-0">
+                      <img
+                        src={`https://api.dicebear.com/7.x/bottts/svg?seed=${member.userId}`}
+                        alt={member.displayName}
+                        className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-950"
+                      />
+                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white dark:border-zinc-900" />
+                    </div>
+                    <div>
+                      {member.nickname ? (
+                        <>
+                          <span className="block font-bold text-indigo-600 dark:text-indigo-400 font-sans">
+                            {member.nickname}
+                          </span>
+                          <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">
+                            {member.displayName} · {member.email}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="block font-semibold text-zinc-800 dark:text-zinc-100 font-sans">{member.displayName}</span>
+                          <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">{member.email}</span>
+                        </>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <span className="block font-semibold text-zinc-800 dark:text-zinc-100 dark:text-zinc-200 font-sans">{member.displayName}</span>
-                    <span className="block text-[10px] text-zinc-400 dark:text-zinc-500 font-sans">{member.email}</span>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase font-sans ${
+                      member.role === 'owner'
+                        ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400'
+                        : 'bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400'
+                    }`}>
+                      {member.role === 'owner' ? 'ადმინი' : 'სტუდენტი'}
+                    </span>
+                    <button
+                      onClick={() => {
+                        playClickSound();
+                        setEditingNickname(member.userId);
+                        setNicknameInput(member.nickname || '');
+                      }}
+                      className="p-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-400 dark:text-zinc-500 hover:text-indigo-500 transition"
+                      title="ნიქნეიმის დაწერა"
+                    >
+                      <Pencil className="w-3 h-3" />
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-semibold uppercase font-sans ${
-                    member.role === 'owner' 
-                      ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400' 
-                      : 'bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400'
-                  }`}>
-                    {member.role === 'owner' ? 'ადმინი' : 'სტუდენტი'}
-                  </span>
-                </div>
+                {/* Inline nickname edit */}
+                {editingNickname === member.userId && (
+                  <div className="flex items-center gap-2 pl-10 animate-in slide-in-from-top-1 duration-150">
+                    <input
+                      autoFocus
+                      type="text"
+                      value={nicknameInput}
+                      onChange={e => setNicknameInput(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') handleSaveNickname(member.userId);
+                        if (e.key === 'Escape') { setEditingNickname(null); setNicknameInput(''); }
+                      }}
+                      placeholder="ნიქნეიმი (ცარიელი = გასუფთავება)"
+                      maxLength={30}
+                      className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border border-indigo-300 dark:border-indigo-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 focus:ring-1 focus:ring-indigo-500 outline-none font-sans"
+                    />
+                    <button
+                      onClick={() => handleSaveNickname(member.userId)}
+                      className="px-2.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[10px] font-bold transition"
+                    >
+                      <Check className="w-3 h-3" />
+                    </button>
+                    <button
+                      onClick={() => { setEditingNickname(null); setNicknameInput(''); }}
+                      className="p-1.5 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition"
+                    >
+                      <XIcon className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
