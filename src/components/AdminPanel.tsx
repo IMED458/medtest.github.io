@@ -32,36 +32,41 @@ export const AdminPanel: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Fetch user counts
-    const unsubUsers = onSnapshot(collection(db, 'users'), (snapshot) => {
-      setUsersCount(snapshot.size);
-    });
+    // Only run queries if user is actually admin
+    if (!isAdmin) {
+      setLoading(false);
+      return;
+    }
 
-    // 2. Fetch groups count
+    // 1. Groups count
     const unsubGroups = onSnapshot(collection(db, 'groups'), (snapshot) => {
       const list: Group[] = [];
-      snapshot.forEach((doc) => {
-        list.push(doc.data() as Group);
-      });
+      snapshot.forEach((doc) => { list.push(doc.data() as Group); });
       setGroups(list);
-    });
+    }, (err) => { console.warn('admin groups:', err); });
 
-    // 3. Fetch tests count
+    // 2. Tests count
     const unsubTests = onSnapshot(collection(db, 'tests'), (snapshot) => {
       const list: TestMetadata[] = [];
-      snapshot.forEach((doc) => {
-        list.push(doc.data() as TestMetadata);
-      });
+      snapshot.forEach((doc) => { list.push(doc.data() as TestMetadata); });
       setTests(list);
       setLoading(false);
+    }, (err) => { console.warn('admin tests:', err); setLoading(false); });
+
+    // 3. User count — try to read users collection; may fail based on rules
+    const unsubUsers = onSnapshot(collection(db, 'users'), (snapshot) => {
+      setUsersCount(snapshot.size);
+    }, () => {
+      // If rules deny listing, count stays 0 — not critical
+      setUsersCount(0);
     });
 
     return () => {
-      unsubUsers();
       unsubGroups();
       unsubTests();
+      unsubUsers();
     };
-  }, []);
+  }, [isAdmin]);
 
   // System Logs mock (to maintain a highly detailed and live telemetry feed in Admin view)
   const auditLogs: SystemLog[] = [
